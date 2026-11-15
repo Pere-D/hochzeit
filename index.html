@@ -343,6 +343,56 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
   .draw.armed path,.draw.armed ellipse{stroke-dashoffset:0}
   .fade.armed{opacity:1;transform:none}
 }
+
+/* Timeline with symbols, alternating left and right; the gold line grows as you scroll */
+#tag{overflow-x:clip}
+.timeline{position:relative;max-width:880px}
+.timeline::before,.timeline::after{content:"";position:absolute;left:50%;top:32px;bottom:40px;width:2px;margin-left:-1px;border-radius:2px}
+.timeline::before{background:var(--line)}
+.timeline::after{background:linear-gradient(var(--gold-l),var(--gold) 40%,var(--gold-d));transform-origin:top;transform:scaleY(var(--p,1))}
+.timeline li{position:relative;z-index:1;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);gap:0 28px;align-items:start;margin-bottom:30px}
+.timeline .rail::before,.timeline .rail::after{display:none}
+.timeline .time{text-align:right;padding-top:16px;font-size:27px}
+.timeline .what{padding:10px 0 0}
+.timeline li:nth-child(even) .time{grid-column:3;grid-row:1;text-align:left}
+.timeline li:nth-child(even) .what{grid-column:1;grid-row:1;text-align:right}
+.timeline li:nth-child(even) .rail{grid-column:2;grid-row:1}
+.ico-c{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--white);border:1px solid var(--gold-l);box-shadow:0 0 0 7px var(--white),0 12px 26px -14px rgba(134,102,43,.6);transition:transform .4s ease,background .3s ease}
+.timeline li.key .ico-c{border-color:var(--gold);background:var(--gold-t)}
+.timeline li:hover .ico-c{transform:scale(1.08) rotate(-5deg)}
+.tl-ico{width:32px;height:32px;overflow:visible}
+.tl-ico path,.tl-ico circle{stroke-dasharray:1;stroke-dashoffset:0}
+.tl-ico .bub{fill:var(--gold);stroke:none;stroke-dasharray:none;animation:bub 2.8s ease-in infinite}
+.tl-ico .b2{animation-delay:1.3s}
+.tl-ico .gem{fill:var(--gold-t);animation:twinkle 2.6s ease-in-out infinite}
+.tl-ico .flame{fill:var(--gold-l);transform-origin:12px 9px;animation:flicker 1.4s ease-in-out infinite}
+.tl-i6{animation:bob 1.8s ease-in-out infinite}
+@keyframes bub{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-6px);opacity:0}}
+@keyframes twinkle{0%,100%{fill:var(--gold-t)}50%{fill:var(--gold-l)}}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.15,.9) rotate(4deg)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-6deg)}}
+.timeline li.now .ico-c{background:var(--gold);border-color:var(--gold)}
+.timeline li.now .tl-ico{stroke:#fff}
+.timeline li.tl-armed .ico-c{opacity:0;transform:scale(.5)}
+.timeline li.tl-armed .tl-ico path,.timeline li.tl-armed .tl-ico circle:not(.bub){stroke-dashoffset:1}
+.timeline li.tl-armed .what,.timeline li.tl-armed .time{opacity:0}
+.timeline li.tl-armed .what,.timeline li.tl-armed:nth-child(even) .time{transform:translateX(36px)}
+.timeline li.tl-armed .time,.timeline li.tl-armed:nth-child(even) .what{transform:translateX(-36px)}
+.timeline li.tl-go .ico-c{transition:opacity .5s ease,transform .7s cubic-bezier(.3,1.6,.5,1)}
+.timeline li.tl-go .tl-ico path,.timeline li.tl-go .tl-ico circle{transition:stroke-dashoffset 1.2s ease .35s}
+.timeline li.tl-go .what,.timeline li.tl-go .time{transition:opacity .8s ease .15s,transform .8s cubic-bezier(.2,.7,.2,1) .15s}
+@media (max-width:760px){
+  .timeline::before,.timeline::after{left:28px;top:28px}
+  .timeline li,.timeline li:nth-child(even){grid-template-columns:56px minmax(0,1fr);gap:0 16px;margin-bottom:22px}
+  .timeline li .rail,.timeline li:nth-child(even) .rail{grid-column:1;grid-row:1 / span 2}
+  .timeline li .time,.timeline li:nth-child(even) .time{grid-column:2;grid-row:1;text-align:left;padding-top:6px;font-size:21px}
+  .timeline li .time small,.timeline li:nth-child(even) .time small{display:inline}
+  .timeline li .what,.timeline li:nth-child(even) .what{grid-column:2;grid-row:2;text-align:left;padding:2px 0 0}
+  .ico-c{width:56px;height:56px;box-shadow:0 0 0 5px var(--white),0 10px 22px -14px rgba(134,102,43,.6)}
+  .tl-ico{width:28px;height:28px}
+  .timeline li.tl-armed .what,.timeline li.tl-armed .time,.timeline li.tl-armed:nth-child(even) .what,.timeline li.tl-armed:nth-child(even) .time{transform:translateX(24px)}
+}
+@media (prefers-reduced-motion:reduce){.timeline::after{transform:none}}
 </style>
 </head>
 <body>
@@ -435,12 +485,12 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
       <p class="sec-lead" data-i18n="day.lead">So stellen wir uns den Tag vor. Die Zeiten sind ungefähr, das Wichtigste ist, dass ihr da seid.</p>
     </div>
     <ol class="timeline">
-      <li data-at="2027-08-28T14:00:00Z" data-tk="ev1.time"><span class="time" data-i18n="ev1.time">16:00</span><span class="rail"></span><div class="what"><h3 data-i18n="ev1.t">Willkommen</h3><p data-i18n="ev1.d">Wir begrüssen euch mit einem Glas und Harmonika-Klängen.</p></div></li>
-      <li class="key" data-at="2027-08-28T15:00:00Z" data-tk="ev2.time"><span class="time" data-i18n="ev2.time">17:00</span><span class="rail"></span><div class="what"><h3 data-i18n="ev2.t">Unsere Trauung</h3><p data-i18n="ev2.d">Der Moment, auf den wir uns am meisten freuen: Wir sagen Ja.</p></div></li>
-      <li data-at="2027-08-28T16:00:00Z" data-tk="ev3.time"><span class="time" data-i18n="ev3.time">18:00<small>–18:30</small></span><span class="rail"></span><div class="what"><h3 data-i18n="ev3.t">In den Festsaal</h3><p data-i18n="ev3.d">Gemeinsam ziehen wir in den Saal ein.</p></div></li>
-      <li data-at="2027-08-28T17:00:00Z" data-tk="ev4.time"><span class="time" data-i18n="ev4.time">19:00</span><span class="rail"></span><div class="what"><h3 data-i18n="ev4.t">Abendessen</h3><p data-i18n="ev4.d">Wir essen, lachen und stossen gemeinsam an.</p></div></li>
-      <li class="key" data-at="2027-08-28T20:00:00Z" data-tk="ev5.time"><span class="time" data-i18n="ev5.time">22:00</span><span class="rail"></span><div class="what"><h3 data-i18n="ev5.t">Hochzeitstorte</h3><p data-i18n="ev5.d">Wir schneiden die Torte an, mit euch an unserer Seite.</p></div></li>
-      <li data-at="2027-08-28T20:30:00Z"><span class="time" data-i18n="ev6.time">bis 03:00</span><span class="rail"></span><div class="what"><h3 data-i18n="ev6.t">Party</h3><p data-i18n="ev6.d">Dann gehört die Tanzfläche euch, bis tief in die Nacht.</p></div></li>
+      <li data-at="2027-08-28T14:00:00Z" data-tk="ev1.time"><span class="time" data-i18n="ev1.time">16:00</span><span class="rail"><span class="ico-c"><svg class="ico tl-ico tl-i1" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M4.5 3h4l-.4 5.2a1.6 1.6 0 0 1-3.2 0z"/><path pathLength="1" d="M6.5 9.8V17M4.6 17h3.8"/><path pathLength="1" d="M15.5 3h4l-.4 5.2a1.6 1.6 0 0 1-3.2 0z"/><path pathLength="1" d="M17.5 9.8V17M15.6 17h3.8"/><path pathLength="1" d="M12 2.2v2.2M10.2 4.6l.9.7M13.8 4.6l-.9.7"/><circle class="bub" cx="6.6" cy="6" r=".55"/><circle class="bub b2" cx="17.4" cy="6.2" r=".55"/></svg></span></span><div class="what"><h3 data-i18n="ev1.t">Willkommen</h3><p data-i18n="ev1.d">Wir begrüssen euch mit einem Glas und Harmonika-Klängen.</p></div></li>
+      <li class="key" data-at="2027-08-28T15:00:00Z" data-tk="ev2.time"><span class="time" data-i18n="ev2.time">17:00</span><span class="rail"><span class="ico-c"><svg class="ico tl-ico tl-i2" viewBox="0 0 24 24" aria-hidden="true"><circle pathLength="1" cx="9" cy="14.5" r="5"/><circle pathLength="1" cx="15" cy="14.5" r="5"/><path class="gem" pathLength="1" d="M15 9.5l-2-2.4 1-1.4h2l1 1.4z"/></svg></span></span><div class="what"><h3 data-i18n="ev2.t">Unsere Trauung</h3><p data-i18n="ev2.d">Der Moment, auf den wir uns am meisten freuen: Wir sagen Ja.</p></div></li>
+      <li data-at="2027-08-28T16:00:00Z" data-tk="ev3.time"><span class="time" data-i18n="ev3.time">18:00<small>–18:30</small></span><span class="rail"><span class="ico-c"><svg class="ico tl-ico tl-i3" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M5.5 21V10.5a6.5 6.5 0 0 1 13 0V21"/><path pathLength="1" d="M12 4v17M3 21h18M10.3 13.5v2M13.7 13.5v2"/></svg></span></span><div class="what"><h3 data-i18n="ev3.t">In den Festsaal</h3><p data-i18n="ev3.d">Gemeinsam ziehen wir in den Saal ein.</p></div></li>
+      <li data-at="2027-08-28T17:00:00Z" data-tk="ev4.time"><span class="time" data-i18n="ev4.time">19:00</span><span class="rail"><span class="ico-c"><svg class="ico tl-ico tl-i4" viewBox="0 0 24 24" aria-hidden="true"><circle pathLength="1" cx="12" cy="13" r="5"/><path pathLength="1" d="M3.5 4v4.5a1.5 1.5 0 0 0 3 0V4M5 10v10"/><path pathLength="1" d="M20.5 4c-1.6 1.2-2 3.4-2 6.5h2V20"/></svg></span></span><div class="what"><h3 data-i18n="ev4.t">Abendessen</h3><p data-i18n="ev4.d">Wir essen, lachen und stossen gemeinsam an.</p></div></li>
+      <li class="key" data-at="2027-08-28T20:00:00Z" data-tk="ev5.time"><span class="time" data-i18n="ev5.time">22:00</span><span class="rail"><span class="ico-c"><svg class="ico tl-ico tl-i5" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M4.5 21h15M6 21v-5h12v5M8 16v-4h8v4M12 12V9.5"/><path class="flame" pathLength="1" d="M12 9.2c-1.1-1-1.1-2.2 0-3.4 1.1 1.2 1.1 2.4 0 3.4z"/></svg></span></span><div class="what"><h3 data-i18n="ev5.t">Hochzeitstorte</h3><p data-i18n="ev5.d">Wir schneiden die Torte an, mit euch an unserer Seite.</p></div></li>
+      <li data-at="2027-08-28T20:30:00Z"><span class="time" data-i18n="ev6.time">bis 03:00</span><span class="rail"><span class="ico-c"><svg class="ico tl-ico tl-i6" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M9 18.5V6.5l10-2.2v12"/><circle pathLength="1" cx="7" cy="18.5" r="2"/><circle pathLength="1" cx="17" cy="16.3" r="2"/></svg></span></span><div class="what"><h3 data-i18n="ev6.t">Party</h3><p data-i18n="ev6.d">Dann gehört die Tanzfläche euch, bis tief in die Nacht.</p></div></li>
     </ol>
     <div class="cal">
       <p data-i18n="cal.lead">Speichert euch den Tag im Kalender</p>
@@ -1021,6 +1071,20 @@ if(lang==="cs") selectTab($("tab-cz"));
   if("IntersectionObserver" in window){ new IntersectionObserver(es=>{visible=es[0].isIntersecting; (visible&&!document.hidden)?play():stop();}).observe(hero); }
   document.addEventListener("visibilitychange",()=>{(visible&&!document.hidden)?play():stop();});
   play();
+})();
+
+/* Timeline: the gold line grows with scrolling, stations pop in left and right */
+(function(){
+  const tl=document.querySelector(".timeline"); if(!tl) return;
+  if(REDUCED||!("IntersectionObserver" in window)) return;
+  const items=[...tl.children];
+  items.forEach(li=>{ if(li.getBoundingClientRect().top>innerHeight*0.85) li.classList.add("tl-armed"); });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("tl-go"); e.target.classList.remove("tl-armed"); io.unobserve(e.target); } }),{rootMargin:"0px 0px -15% 0px"});
+  items.forEach(li=>{ if(li.classList.contains("tl-armed")) io.observe(li); });
+  let raf=0;
+  const upd=()=>{ raf=0; const r=tl.getBoundingClientRect(); const p=Math.max(0,Math.min(1,(innerHeight*0.7-r.top)/Math.max(1,r.height))); tl.style.setProperty("--p",p.toFixed(3)); };
+  addEventListener("scroll",()=>{ if(!raf) raf=requestAnimationFrame(upd); },{passive:true});
+  addEventListener("resize",upd); upd();
 })();
 
 /* Numbers count up when they come into view */
