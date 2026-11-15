@@ -10,7 +10,7 @@
 <meta property="og:title" content="Kim &amp; Pere · 28.08.2027">
 <meta property="og:description" content="Wir heiraten! Alle Infos zu unserem Tag, zur Anreise und zur Zusage.">
 <meta property="og:url" content="https://hochzeit.pere-dalic.ch/">
-<meta property="og:image" content="https://hochzeit.pere-dalic.ch/pinija.jpg">
+<meta property="og:image" content="https://hochzeit.pere-dalic.ch/og.jpg">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fff'/%3E%3Cpath d='M32 52C14 40 8 30 8 21a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 9-6 19-24 31z' fill='%23B8914A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -211,7 +211,7 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 /* Venue photo with a slow drift and a pin on the hotel */
 .vp{position:relative;margin:0 0 48px;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:var(--gold-t);box-shadow:0 34px 60px -42px rgba(134,102,43,.75)}
 .vp::after{content:"";position:absolute;inset:12px;border:1px solid rgba(243,228,182,.9);border-radius:13px;pointer-events:none}
-.vp-zoom{position:absolute;left:0;top:50%;width:100%;aspect-ratio:1188/789;translate:0 -50%;transform-origin:32% 52.5%;animation:kb 26s ease-in-out infinite alternate}
+.vp-zoom{position:absolute;left:0;top:50%;width:100%;aspect-ratio:1/1;translate:0 -50%;transform-origin:54% 52.5%;animation:kb 26s ease-in-out infinite alternate}
 .vp-zoom img{display:block;width:100%;height:100%;object-fit:cover}
 @keyframes kb{from{scale:1}to{scale:1.09}}
 .pin{position:absolute;width:0;height:0}
@@ -219,6 +219,9 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,255,255,.85)}100%{box-shadow:0 0 0 20px rgba(255,255,255,0)}}
 .pin-label{position:absolute;left:16px;bottom:14px;white-space:nowrap;background:rgba(255,255,255,.95);color:var(--ink);font:500 14px/1 var(--f-body);letter-spacing:.02em;padding:10px 15px;border-radius:999px;box-shadow:0 10px 26px -12px rgba(0,0,0,.45)}
 .pin-label::before{content:"\2665";color:var(--gold);margin-right:7px}
+.pin-sm .pin-dot{width:12px;height:12px;left:-6px;top:-6px;border-width:2px;background:var(--ink)}
+.pin-sm .pin-label{font-size:12px;padding:7px 11px;background:rgba(255,255,255,.85)}
+.pin-sm .pin-label::before{content:none}
 .vp.go .pin-label{animation:rise .8s ease 1.3s backwards}
 
 /* Static site extras: sheet-backed RSVP, photo wall */
@@ -318,7 +321,6 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
   .rsvp-card{padding:24px 18px 20px}
   .vp{aspect-ratio:4/3;border-radius:16px;margin-bottom:36px}
   .vp::after{inset:8px;border-radius:10px}
-  .vp-zoom{top:0;left:50%;height:100%;width:auto;translate:-50% 0}
   .pin-label{font-size:12px;padding:8px 12px;left:12px;bottom:10px}
   .hero-in{padding-block:52px 60px}
   .kicker{font-size:13px;letter-spacing:.18em}
@@ -564,8 +566,9 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
     </div>
     <figure class="vp fade">
       <div class="vp-zoom">
-        <img src="pinija.jpg" width="1188" height="789" alt="Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel" data-i18n-alt="place.alt" loading="lazy" decoding="async">
-        <div class="pin" style="left:32%;top:52.5%"><span class="pin-dot"></span><span class="pin-label" data-i18n="place.pin">Hier feiern wir</span></div>
+        <img src="pinija.jpg?v=2" width="800" height="800" alt="Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel" data-i18n-alt="place.alt" loading="lazy" decoding="async">
+        <div class="pin pin-sm" style="left:29%;top:40.6%"><span class="pin-dot"></span><span class="pin-label">Hotel Pinija</span></div>
+        <div class="pin" style="left:54%;top:52.5%"><span class="pin-dot"></span><span class="pin-label" data-i18n="place.pin">Hier feiern wir</span></div>
       </div>
     </figure>
     <figure class="plan pop">
