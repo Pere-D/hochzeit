@@ -977,7 +977,7 @@ de:{
 "wx.title":"Wetter am Hochzeitstag","wx.night":"Nacht","wx.live":"Live-Prognose","wx.clim":"Klimawerte","wx.k.sun":"Sonnig","wx.k.partly":"Leicht bewölkt","wx.k.cloud":"Bewölkt","wx.k.rain":"Regen möglich","wx.k.storm":"Gewitter möglich","wx.rain":"Regen","wx.wind":"Wind","wx.sunset":"Sonnenuntergang","wx.sea":"Meer","wx.upd":"Prognose für den 28. August, aktualisiert um {t}","wx.climate":"Die echte Prognose erscheint hier ab Mitte August. Normalerweise ist es Ende August sonnig mit 28 bis 30 °C, nachts um 20 °C.",
 "stay.early":"Tipp: Bei Buchung vor dem 30. Dezember 2026 gibt es möglicherweise zusätzlich einen Frühbucherrabatt von bis zu 20&nbsp;%. Ohne Gewähr, die genauen Konditionen seht ihr bei der Buchung beim Hotel.",
 "travel.q":"Woher reist ihr an?","travel.qh":"Tippt auf euer Land, dann seht ihr die passenden Infos.",
-"p.title":"Person {n}","p.first":"Vorname","p.last":"Nachname","p.diet":"Essenswünsche (optional)","p.otherPh":"z. B. Nussallergie","diet.veg":"Vegetarisch","diet.vegan":"Vegan","diet.gluten":"Glutenfrei","diet.lact":"Laktosefrei","diet.other":"Sonstiges",
+"p.title":"Person {n}","p.first":"Vorname","p.last":"Nachname","p.diet":"Essenswünsche (optional)","p.otherPh":"z. B. Nussallergie","diet.kids":"Kindermenü","diet.veg":"Vegetarisch","diet.vegan":"Vegan","diet.gluten":"Glutenfrei","diet.lact":"Laktosefrei","diet.other":"Sonstiges",
 "foot.love":"In Liebe","foot.text":"Wir freuen uns riesig auf euch!","foot.fam":"Familien Weiss &amp; Dalić"
 },
 hr:{
@@ -1060,7 +1060,7 @@ hr:{
 "wx.title":"Vrijeme na dan vjenčanja","wx.night":"Noć","wx.live":"Prognoza uživo","wx.clim":"Klimatski prosjek","wx.k.sun":"Sunčano","wx.k.partly":"Djelomično oblačno","wx.k.cloud":"Oblačno","wx.k.rain":"Moguća kiša","wx.k.storm":"Moguća grmljavina","wx.rain":"Kiša","wx.wind":"Vjetar","wx.sunset":"Zalazak sunca","wx.sea":"More","wx.upd":"Prognoza za 28. kolovoza, ažurirano u {t}","wx.climate":"Prava prognoza pojavit će se ovdje od sredine kolovoza. Krajem kolovoza obično je sunčano, 28 do 30 °C, noću oko 20 °C.",
 "stay.early":"Savjet: kod rezervacije prije 30. prosinca 2026. moguć je dodatni popust za ranu rezervaciju do 20&nbsp;%. Bez jamstva, točne uvjete vidjet ćete pri rezervaciji u hotelu.",
 "travel.q":"Odakle putujete?","travel.qh":"Dodirnite svoju zemlju i vidjet ćete informacije za vas.",
-"p.title":"Osoba {n}","p.first":"Ime","p.last":"Prezime","p.diet":"Prehrana (neobavezno)","p.otherPh":"npr. alergija na orašaste plodove","diet.veg":"Vegetarijanski","diet.vegan":"Veganski","diet.gluten":"Bez glutena","diet.lact":"Bez laktoze","diet.other":"Ostalo",
+"p.title":"Osoba {n}","p.first":"Ime","p.last":"Prezime","p.diet":"Prehrana (neobavezno)","p.otherPh":"npr. alergija na orašaste plodove","diet.kids":"Dječji meni","diet.veg":"Vegetarijanski","diet.vegan":"Veganski","diet.gluten":"Bez glutena","diet.lact":"Bez laktoze","diet.other":"Ostalo",
 "foot.love":"S ljubavlju","foot.text":"Jako se veselimo vama!","foot.fam":"Obitelji Weiss i Dalić"
 },
 cs:{
@@ -1143,7 +1143,7 @@ cs:{
 "wx.title":"Počasí ve svatební den","wx.night":"Noc","wx.live":"Aktuální předpověď","wx.clim":"Klimatický průměr","wx.k.sun":"Slunečno","wx.k.partly":"Polojasno","wx.k.cloud":"Zataženo","wx.k.rain":"Možný déšť","wx.k.storm":"Možné bouřky","wx.rain":"Déšť","wx.wind":"Vítr","wx.sunset":"Západ slunce","wx.sea":"Moře","wx.upd":"Předpověď na 28. srpna, aktualizováno v {t}","wx.climate":"Skutečná předpověď se tu objeví od poloviny srpna. Koncem srpna bývá obvykle slunečno, 28 až 30 °C, v noci kolem 20 °C.",
 "stay.early":"Tip: při rezervaci před 30. prosincem 2026 může být navíc k dispozici sleva za včasnou rezervaci až 20&nbsp;%. Bez záruky, přesné podmínky uvidíte při rezervaci v hotelu.",
 "travel.q":"Odkud k nám pojedete?","travel.qh":"Klepněte na svou zemi a uvidíte informace pro vás.",
-"p.title":"Osoba {n}","p.first":"Jméno","p.last":"Příjmení","p.diet":"Strava (nepovinné)","p.otherPh":"např. alergie na ořechy","diet.veg":"Vegetariánské","diet.vegan":"Veganské","diet.gluten":"Bez lepku","diet.lact":"Bez laktózy","diet.other":"Jiné",
+"p.title":"Osoba {n}","p.first":"Jméno","p.last":"Příjmení","p.diet":"Strava (nepovinné)","p.otherPh":"např. alergie na ořechy","diet.kids":"Dětské menu","diet.veg":"Vegetariánské","diet.vegan":"Veganské","diet.gluten":"Bez lepku","diet.lact":"Bez laktózy","diet.other":"Jiné",
 "foot.love":"S láskou","foot.text":"Moc se na vás těšíme!","foot.fam":"Rodiny Weiss a Dalić"
 }};
 
@@ -1402,7 +1402,7 @@ document.querySelector(".hero .names").addEventListener("click",e=>confetti(e.cl
 
 /* RSVP: number of people, first and last name per person, diet as tick boxes */
 let RSVP_PHONE=""; // kommt aus dem Admin-Sheet (Einstellungen > whatsapp), steht bewusst nicht im Code
-const DIETS=["veg","vegan","gluten","lact","other"];
+const DIETS=["kids","veg","vegan","gluten","lact","other"];
 const R={yes:null,n:2,p:[]};
 function person(i){ if(!R.p[i]) R.p[i]={f:"",l:"",d:{},o:""}; return R.p[i]; }
 function peopleCount(){ return R.yes===false?1:R.n; }
