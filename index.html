@@ -501,8 +501,13 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 .tq-arrow{display:block;width:22px;height:22px;margin:6px auto 0;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:tqBob 1.6s ease-in-out infinite}
 @keyframes tqBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 .tabs button{display:inline-flex;align-items:center;gap:8px}
-.tabs button::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid var(--gold)}
-.tabs button[aria-selected="true"]::before{background:var(--gold-l);border-color:var(--gold-l)}
+.tabs{gap:10px}
+.tabs button{gap:10px;padding:8px 18px 8px 8px;font-size:16px;transition:transform .2s ease,box-shadow .2s ease,background .2s,color .2s,border-color .2s}
+.tabs button:hover{transform:translateY(-2px);box-shadow:0 10px 22px -16px rgba(134,102,43,.7)}
+.flag{display:inline-block;width:30px;height:30px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 0 0 3px #fff}
+.flag svg{display:block;width:100%;height:100%}
+.tabs button[aria-selected="true"] .flag{box-shadow:0 0 0 2px var(--gold-l)}
+.panel:not([hidden]){animation:rise .45s ease both}
 </style>
 </head>
 <body>
@@ -729,12 +734,12 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
     <p class="tip" data-i18n="travel.tip">Reist am besten am Donnerstag oder Freitag an, die Feier ist am Samstag.</p>
     <div class="tq"><p class="tq-q" data-i18n="travel.q">Woher reist ihr an?</p><p class="tq-h" data-i18n="travel.qh">Tippt auf euer Land, dann seht ihr die passenden Infos.</p><svg class="tq-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
     <div class="tabs" role="tablist" aria-label="Anreise">
-      <button type="button" role="tab" id="tab-ch" aria-controls="p-ch" aria-selected="true" data-i18n="tab.ch">Schweiz</button>
-      <button type="button" role="tab" id="tab-de" aria-controls="p-de" aria-selected="false" tabindex="-1" data-i18n="tab.de">Deutschland</button>
-      <button type="button" role="tab" id="tab-cz" aria-controls="p-cz" aria-selected="false" tabindex="-1" data-i18n="tab.cz">Tschechien</button>
-      <button type="button" role="tab" id="tab-ba" aria-controls="p-ba" aria-selected="false" tabindex="-1" data-i18n="tab.ba">Bosnien und Herzegowina</button>
+      <button type="button" role="tab" id="tab-ch" aria-controls="p-ch" aria-selected="false" ><span class="flag" aria-hidden="true"><svg viewBox="0 0 32 32"><rect width="32" height="32" fill="#D52B1E"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg></span><span data-i18n="tab.ch">Schweiz</span></button>
+      <button type="button" role="tab" id="tab-de" aria-controls="p-de" aria-selected="false" tabindex="-1" ><span class="flag" aria-hidden="true"><svg viewBox="0 0 5 3" preserveAspectRatio="xMidYMid slice"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></span><span data-i18n="tab.de">Deutschland</span></button>
+      <button type="button" role="tab" id="tab-cz" aria-controls="p-cz" aria-selected="false" tabindex="-1" ><span class="flag" aria-hidden="true"><svg viewBox="0 0 6 4" preserveAspectRatio="xMidYMid slice"><rect width="6" height="2" fill="#fff"/><rect y="2" width="6" height="2" fill="#D7141A"/><path d="M0 0L3 2L0 4z" fill="#11457E"/></svg></span><span data-i18n="tab.cz">Tschechien</span></button>
+      <button type="button" role="tab" id="tab-ba" aria-controls="p-ba" aria-selected="false" tabindex="-1" ><span class="flag" aria-hidden="true"><svg viewBox="0 0 16 10" preserveAspectRatio="xMidYMid slice"><rect width="16" height="10" fill="#002395"/><path d="M4.6 0H13V10z" fill="#FECB00"/><g fill="#fff"><circle cx="3.9" cy=".9" r=".42"/><circle cx="4.75" cy="1.95" r=".42"/><circle cx="5.6" cy="3" r=".42"/><circle cx="6.45" cy="4.05" r=".42"/><circle cx="7.3" cy="5.1" r=".42"/><circle cx="8.15" cy="6.15" r=".42"/><circle cx="9" cy="7.2" r=".42"/><circle cx="9.85" cy="8.25" r=".42"/><circle cx="10.7" cy="9.3" r=".42"/></g></svg></span><span data-i18n="tab.ba">Bosnien und Herzegowina</span></button>
     </div>
-    <div class="panel" role="tabpanel" id="p-ch" aria-labelledby="tab-ch">
+    <div class="panel" role="tabpanel" id="p-ch" aria-labelledby="tab-ch" hidden>
       <dl>
         <div class="row"><dt data-i18n="lbl.fly">Flug</dt><dd data-i18n="ch.fly"></dd></div>
         <div class="row"><dt data-i18n="lbl.car">Auto</dt><dd data-i18n="ch.car"></dd></div>
@@ -1188,7 +1193,6 @@ tabs.forEach((tab,i)=>{
   tab.addEventListener("click",()=>selectTab(tab));
   tab.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault(); selectTab(tabs[(i+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length],true);} });
 });
-if(lang==="cs") selectTab($("tab-cz"));
 
 /* Gold lines draw themselves as they scroll into view */
 (function(){
