@@ -7,6 +7,7 @@
 const SHEET_RSVP = 'Zusagen';
 const SHEET_TEXT = 'Inhalte';
 const SHEET_SET = 'Einstellungen';
+const SHEET_GUESTS = 'Gäste';
 const FOLDER_NAME = 'Hochzeit Kim & Pere Fotos';
 const SHEET_ID = '1eDePisfs74wirlVFGT2e-g4F7Z92GXjxmaEejEyz0Us';
 function book() { return SpreadsheetApp.openById(SHEET_ID); }
@@ -17,7 +18,7 @@ function setup() {
 
   const r = ss.getSheetByName(SHEET_RSVP) || ss.insertSheet(SHEET_RSVP);
   if (r.getLastRow() === 0) {
-    r.appendRow(['Zeit', 'Name', 'Kommt', 'Personen', 'Essenswünsche', 'Song', 'Nachricht', 'Sprache']);
+    r.appendRow(['Zeit', 'Name', 'Kommt', 'Personen', 'Erwachsene', 'Kinder', 'Essenswünsche', 'Song', 'Nachricht', 'Sprache']);
     r.setFrozenRows(1); bold(r);
   }
 
@@ -92,17 +93,50 @@ function saveRsvp(d) {
   if (!name) return { ok: false, error: 'name' };
   const yes = d.yes === true;
   const n = yes ? Math.max(1, Math.min(20, parseInt(d.n, 10) || 1)) : 0;
+  const a = yes ? Math.max(0, Math.min(20, parseInt(d.a, 10) || 0)) : 0;
+  const k = yes ? Math.max(0, Math.min(20, parseInt(d.k, 10) || 0)) : 0;
+  const now = new Date();
+  const guests = (Array.isArray(d.guests) ? d.guests : []).slice(0, 20).map(g => [
+    now, cell(clip(g && g.f, 80)), cell(clip(g && g.l, 80)), g && g.kid ? 'Kind' : 'Erwachsen',
+    yes ? 'Ja' : 'Nein', cell(clip(g && g.diet, 300))
+  ]);
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);
   try {
-    book().getSheetByName(SHEET_RSVP).appendRow([
-      new Date(), cell(name), yes ? 'Ja' : 'Nein', n,
+    const ss = book();
+    const r = ss.getSheetByName(SHEET_RSVP);
+    rsvpColumns(r);
+    r.appendRow([
+      now, cell(name), yes ? 'Ja' : 'Nein', n, a, k,
       cell(clip(d.food, 1500)), cell(clip(d.song, 200)), cell(clip(d.msg, 1000)), clip(d.lang, 5)
     ]);
+    if (guests.length) {
+      const g = guestSheet(ss);
+      g.getRange(g.getLastRow() + 1, 1, guests.length, 6).setValues(guests);
+    }
   } finally {
     lock.releaseLock();
   }
   return { ok: true };
+}
+
+// Ergänzt die Spalten Erwachsene und Kinder, falls sie noch fehlen
+function rsvpColumns(sh) {
+  const head = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+  if (head.indexOf('Erwachsene') >= 0) return;
+  sh.insertColumnsAfter(4, 2);
+  sh.getRange(1, 5, 1, 2).setValues([['Erwachsene', 'Kinder']]).setFontWeight('bold');
+}
+
+// Eine Zeile pro Gast, praktisch für Sitzplan und Küche
+function guestSheet(ss) {
+  let g = ss.getSheetByName(SHEET_GUESTS);
+  if (g) return g;
+  g = ss.insertSheet(SHEET_GUESTS, 1);
+  g.getRange(1, 1, 1, 6).setValues([['Zeit', 'Vorname', 'Nachname', 'Erwachsen/Kind', 'Kommt', 'Essenswunsch']]).setFontWeight('bold');
+  g.setFrozenRows(1);
+  g.setColumnWidths(2, 2, 140); g.setColumnWidth(6, 260);
+  return g;
 }
 
 function saveUpload(d) {

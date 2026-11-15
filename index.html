@@ -1444,7 +1444,8 @@ function rsvpPayload(){
   const ppl=people(), kidTag=" ("+I18N.de["rsvp.kid1"]+")";
   const nm=p=>fullName(p.x)+(p.kid?kidTag:"");
   const food=R.yes?ppl.map(p=>{ const d=dietText(p.x,"de"); return d?nm(p)+": "+d:""; }).filter(Boolean).join("; "):"";
-  return {name:ppl.map(nm).join(", "),food,n:R.yes?R.a+R.k:0};
+  const guests=ppl.map(p=>({f:p.x.f.trim(),l:p.x.l.trim(),kid:!!p.kid,diet:R.yes?dietText(p.x,"de"):""}));
+  return {name:ppl.map(nm).join(", "),food,n:R.yes?R.a+R.k:0,a:R.yes?R.a:0,k:R.yes?R.k:0,guests};
 }
 function rsvpText(){
   const v=id=>$(id).value.trim(), pl=rsvpPayload(), ppl=people();
@@ -1570,7 +1571,7 @@ $("rsvp-form").addEventListener("submit",async()=>{
   const b=$("r-submit"), v=id=>$(id).value.trim(), pl=rsvpPayload();
   b.disabled=true; setHint("rsvp.sending");
   try{
-    const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"rsvp",name:pl.name,yes:R.yes===true,n:pl.n,food:pl.food,song:R.yes?v("r-song"):"",msg:v("r-msg"),lang})});
+    const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"rsvp",name:pl.name,yes:R.yes===true,n:pl.n,a:pl.a,k:pl.k,guests:pl.guests,food:pl.food,song:R.yes?v("r-song"):"",msg:v("r-msg"),lang})});
     const j=await r.json(); if(!j||!j.ok) throw j;
     try{ localStorage.setItem("kp-rsvp",JSON.stringify({yes:R.yes===true})); }catch(e){}
     const bb=b.getBoundingClientRect();
