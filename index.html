@@ -541,6 +541,12 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 .chip:has(input:focus-visible){outline:2px solid var(--gold-d);outline-offset:2px}
 .rsvp-card .person input.other{margin-top:10px}
 @media (max-width:420px){.row2{grid-template-columns:1fr}}
+@media (max-width:560px){
+  .count{width:100%;max-width:340px;gap:8px}
+  .count li{flex:1 1 0;min-width:0;padding:12px 4px 10px}
+  .count b{font-size:32px}
+  .count span{font-size:10.5px;letter-spacing:.06em;white-space:nowrap}
+}
 </style>
 </head>
 <body>
