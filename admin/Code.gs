@@ -74,7 +74,8 @@ function doPost(e) {
     if (d.action === 'rsvp') return json(saveRsvp(d));
     if (d.action === 'upload') return json(saveUpload(d));
   } catch (err) {
-    return json({ ok: false, error: 'server' });
+    console.error(err);
+    return json({ ok: false, error: 'server', detail: String((err && err.message) || err).slice(0, 300) });
   }
   return json({ ok: false, error: 'unknown' });
 }
@@ -114,7 +115,8 @@ function saveUpload(d) {
   const stamp = Utilities.formatDate(new Date(), 'Europe/Zurich', 'yyyyMMdd-HHmmss');
   const blob = Utilities.newBlob(Utilities.base64Decode(b64), mime, 'foto-' + stamp + '-' + Math.random().toString(36).slice(2, 6) + '.' + ext);
   const f = folder().createFile(blob);
-  f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  // Freigabe kommt vom Ordner (Jeder mit Link), einzelne Dateien muessen nicht extra freigegeben werden
+  try { f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) {}
   CacheService.getScriptCache().remove('photos');
   return { ok: true, id: f.getId() };
 }
