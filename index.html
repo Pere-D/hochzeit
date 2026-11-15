@@ -552,6 +552,15 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 .cnt-l{font-size:14px;color:var(--muted)}
 .person.kid{background:var(--blush)}
 @media (max-width:560px){.counts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.counts .stepper button{width:38px;height:38px;font-size:20px}.counts .stepper output{min-width:34px;font-size:22px}}
+/* RSVP polish: even steppers and tidy diet grid */
+.counts{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.counts .stepper{display:flex;width:100%;box-sizing:border-box;justify-content:space-between}
+.counts .stepper output{flex:1}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.chip{justify-content:flex-start;padding:10px 12px;border-radius:12px;min-width:0}
+.chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rsvp .person-t{display:flex;align-items:center;gap:8px}
+.rsvp .person-t::after{content:"";flex:1;height:1px;background:var(--line)}
 </style>
 </head>
 <body>
