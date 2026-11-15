@@ -395,6 +395,10 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 @media (prefers-reduced-motion:reduce){.timeline::after{transform:none}}
 
 /* Site plan (OpenStreetMap based) */
+.plan .dot.ghost{fill:#fff;stroke:var(--ink);stroke-width:2}
+.plan .glyph.dark{fill:var(--ink);font-size:17px}
+.legend .k.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.plan-warn{margin:14px auto 0;max-width:46ch;font-size:15px;color:var(--danger)}
 .plan .coast{fill:none;stroke:var(--gold);stroke-width:2}
 .plan .sandp{fill:#F1E3BE;stroke:none}
 .plan .lot{fill:#ECE7DD;stroke:#CFC6B4;stroke-width:1.5}
@@ -580,12 +584,12 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
         <path class="bldg-h" d="M-60,45 L-58,40 L-66,36 L-60,23 L-59,23 L-47,1 L-21,14 L-13,-3 L2,5 L-4,16 L-9,13 L-12,19 L10,30 L26,38 L29,32 L40,10 L41,10 L45,1 L60,8 L55,18 L56,19 L39,52 L38,51 L33,61 L19,54 L18,56 L4,49 L-10,78 L-12,77 L-17,87 L-31,80 L-27,71 L-28,70 L-32,77 L-65,60 L-68,56 L-68,51 L-66,47 L-60,45Z"/>
         <g class="bldg-c"><path d="M-182,-62 L-175,-62 L-170,-59 L-170,-54 L-171,-48 L-177,-44 L-186,-46 L-189,-51 L-187,-57 L-182,-62Z"/><path d="M-186,-46 L-189,-37 L-181,-34 L-177,-44 L-186,-46Z"/></g>
         <path class="walk" d="M-20,12 L-43,-9 L-59,-16 L-93,-36 L-114,-46 L-162,-62"/>
-        <path class="drive" d="M224,-240 L202,-154 L195,-131 L180,-86 L171,-66 L190,-48"/>
+        <path class="drive" d="M224,-240 L202,-154 L195,-131 L180,-86 L171,-66 L141,-51 L111,-41 L85,-54 L53,-66 L18,-79 L-14,-51 L-27,-41 L-57,-21 L-93,-36 L-104,-40"/>
         <text class="lbl sea-l" x="-280" y="190" data-i18n="map.s6">Adria</text>
         <text class="lbl small" x="300" y="-120" data-i18n="map.s5">Petrčane</text>
         <text class="lbl small" x="120" y="-125" data-i18n="map.s4">Strand</text>
         <text class="lbl small" x="248" y="-232" style="text-anchor:start" data-i18n="map.s7">Zufahrt</text>
-        <g transform="translate(212 -22)"><g class="pin-in" style="--d:3"><circle class="dot ink" r="15"/><text class="glyph" y="7">P</text><text class="lbl" x="20" y="-22" style="text-anchor:start" data-i18n="map.s3">Parkplatz</text></g></g>
+        <g transform="translate(-118 -40)"><g class="pin-in" style="--d:3"><circle class="dot ink" r="15"/><text class="glyph" y="7">P</text><text class="lbl small" y="36" data-i18n="map.s3">Parkplatz</text></g></g><g transform="translate(40 -40)"><g class="pin-in" style="--d:4"><circle class="dot ghost" r="13"/><text class="glyph dark" y="6">P</text><text class="lbl small" x="18" y="28" style="text-anchor:start" data-i18n="map.s8">Hotelparkplatz</text></g></g>
         <g transform="translate(-8 40)"><g class="pin-in" style="--d:2"><circle class="dot" r="15"/><text class="glyph" y="7">H</text><text class="lbl" y="44" data-i18n="map.s2">Hotel</text></g></g>
         <g transform="translate(-178 -52)"><g class="pin-in" style="--d:1"><circle class="halo" r="18"/><circle class="dot party" r="18"/><text class="glyph heart" y="8">&#9829;</text><text class="lbl strong" y="-30" data-i18n="map.s1">Feier</text></g></g>
         <g class="scale" transform="translate(330 222)"><path d="M0 0H100M0 -6V6M100 -6V6"/><text class="lbl small" x="50" y="-12">100 m</text></g>
@@ -594,9 +598,10 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
       <ul class="legend">
         <li><span class="k party">&#9829;</span><span data-i18n="map.l1">Feier: Congress &amp; Event Center Zadar</span></li>
         <li><span class="k">H</span><span data-i18n="map.l2">Hotel Pinija (Zimmer und Rezeption)</span></li>
-        <li><span class="k ink">P</span><span data-i18n="map.l3">Parkplatz (öffentlich, kostenpflichtig)</span></li>
+        <li><span class="k ink">P</span><span data-i18n="map.l3">Parkplatz für Hochzeitsgäste direkt vor dem Festsaal</span></li><li><span class="k ghost">P</span><span data-i18n="map.l5">Hotelparkplatz, wenn ihr im Hotel Pinija übernachtet</span></li>
         <li><span class="k walk"></span><span data-i18n="map.l4">Vom Hotel zur Feier ca. 3 Min. zu Fuss</span></li>
       </ul>
+      <p class="plan-warn" data-i18n="map.warn">Bitte nicht die öffentlichen Parkplätze nutzen, die sind im August meist voll.</p>
       <figcaption data-i18n="map.note">Kartengrundlage: © OpenStreetMap-Mitwirkende</figcaption>
     </figure>
     <div class="place-grid">
@@ -857,7 +862,7 @@ de:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Antwort senden","rsvp.sending":"Wird gesendet …","rsvp.ok":"Danke, eure Antwort ist bei uns angekommen! Wir freuen uns riesig auf euch.","rsvp.okNo":"Danke für eure Antwort. Schade, dass ihr nicht dabei sein könnt, wir denken an euch!","rsvp.err":"Das hat leider nicht geklappt. Versucht es nochmal oder antwortet uns per WhatsApp.","rsvp.wa":"Lieber per WhatsApp antworten","rsvp.again":"Antwort ändern",
 "photos.closed":"Das Hochladen ist gerade geschlossen.",
-"map.title":"Lageplan","map.s1":"Feier","map.s2":"Hotel","map.s3":"Parkplatz","map.s4":"Strand","map.s5":"Petrčane","map.s6":"Adria","map.l1":"Feier: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (Zimmer und Rezeption)","map.l3":"Parkplatz (öffentlich, kostenpflichtig)","map.l4":"Vom Hotel zur Feier ca. 3 Min. zu Fuss","map.note":"Kartengrundlage: © OpenStreetMap-Mitwirkende","map.s7":"Zufahrt",
+"map.title":"Lageplan","map.s1":"Feier","map.s2":"Hotel","map.s3":"Parkplatz","map.s4":"Strand","map.s5":"Petrčane","map.s6":"Adria","map.l1":"Feier: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (Zimmer und Rezeption)","map.l3":"Parkplatz für Hochzeitsgäste direkt vor dem Festsaal","map.l5":"Hotelparkplatz, wenn ihr im Hotel Pinija übernachtet","map.s8":"Hotelparkplatz","map.warn":"Bitte nicht die öffentlichen Parkplätze nutzen, die sind im August meist voll.","map.l4":"Vom Hotel zur Feier ca. 3 Min. zu Fuss","map.note":"Kartengrundlage: © OpenStreetMap-Mitwirkende","map.s7":"Zufahrt",
 "foot.love":"In Liebe","foot.text":"Wir freuen uns riesig auf euch!","foot.fam":"Familien Weiss &amp; Dalić"
 },
 hr:{
@@ -936,7 +941,7 @@ hr:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Pošalji odgovor","rsvp.sending":"Šalje se …","rsvp.ok":"Hvala, vaš odgovor je stigao! Jako se veselimo vama.","rsvp.okNo":"Hvala na odgovoru. Šteta što ne možete doći, mislit ćemo na vas!","rsvp.err":"Nažalost nije uspjelo. Pokušajte ponovno ili nam odgovorite preko WhatsAppa.","rsvp.wa":"Radije odgovori preko WhatsAppa","rsvp.again":"Promijeni odgovor",
 "photos.closed":"Učitavanje je trenutno zatvoreno.",
-"map.title":"Plan lokacije","map.s1":"Slavlje","map.s2":"Hotel","map.s3":"Parking","map.s4":"Plaža","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Slavlje: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (sobe i recepcija)","map.l3":"Parkiralište (javno, naplaćuje se)","map.l4":"Od hotela do slavlja oko 3 min pješice","map.note":"Podaci karte: © OpenStreetMap suradnici","map.s7":"Prilaz",
+"map.title":"Plan lokacije","map.s1":"Slavlje","map.s2":"Hotel","map.s3":"Parking","map.s4":"Plaža","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Slavlje: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (sobe i recepcija)","map.l3":"Parkiralište za svatove ispred svečane dvorane","map.l5":"Hotelsko parkiralište, ako spavate u hotelu Pinija","map.s8":"Hotelski parking","map.warn":"Molimo ne koristite javna parkirališta, u kolovozu su obično puna.","map.l4":"Od hotela do slavlja oko 3 min pješice","map.note":"Podaci karte: © OpenStreetMap suradnici","map.s7":"Prilaz",
 "foot.love":"S ljubavlju","foot.text":"Jako se veselimo vama!","foot.fam":"Obitelji Weiss i Dalić"
 },
 cs:{
@@ -1015,7 +1020,7 @@ cs:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Odeslat odpověď","rsvp.sending":"Odesílá se …","rsvp.ok":"Děkujeme, vaše odpověď dorazila! Moc se na vás těšíme.","rsvp.okNo":"Děkujeme za odpověď. Škoda, že nemůžete přijet, budeme na vás myslet!","rsvp.err":"To se bohužel nepovedlo. Zkuste to znovu nebo nám odpovězte přes WhatsApp.","rsvp.wa":"Raději odpovědět přes WhatsApp","rsvp.again":"Změnit odpověď",
 "photos.closed":"Nahrávání je teď uzavřené.",
-"map.title":"Plán areálu","map.s1":"Oslava","map.s2":"Hotel","map.s3":"Parkoviště","map.s4":"Pláž","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Oslava: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (pokoje a recepce)","map.l3":"Parkoviště (veřejné, placené)","map.l4":"Z hotelu na oslavu asi 3 min pěšky","map.note":"Mapová data: © přispěvatelé OpenStreetMap","map.s7":"Příjezd",
+"map.title":"Plán areálu","map.s1":"Oslava","map.s2":"Hotel","map.s3":"Parkoviště","map.s4":"Pláž","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Oslava: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (pokoje a recepce)","map.l3":"Parkoviště pro svatební hosty přímo před sálem","map.l5":"Hotelové parkoviště, pokud spíte v hotelu Pinija","map.s8":"Hotelové parkoviště","map.warn":"Prosím nevyužívejte veřejná parkoviště, v srpnu bývají plná.","map.l4":"Z hotelu na oslavu asi 3 min pěšky","map.note":"Mapová data: © přispěvatelé OpenStreetMap","map.s7":"Příjezd",
 "foot.love":"S láskou","foot.text":"Moc se na vás těšíme!","foot.fam":"Rodiny Weiss a Dalić"
 }};
 
