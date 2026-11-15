@@ -211,7 +211,7 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 /* Venue photo with a slow drift and a pin on the hotel */
 .vp{position:relative;margin:0 0 48px;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:var(--gold-t);box-shadow:0 34px 60px -42px rgba(134,102,43,.75)}
 .vp::after{content:"";position:absolute;inset:12px;border:1px solid rgba(243,228,182,.9);border-radius:13px;pointer-events:none}
-.vp-zoom{position:absolute;left:0;top:50%;width:100%;aspect-ratio:1/1;translate:0 -50%;transform-origin:54% 52.5%;animation:kb 26s ease-in-out infinite alternate}
+.vp-zoom{position:absolute;left:0;top:50%;width:100%;aspect-ratio:4/3;translate:0 -50%;transform-origin:47% 48.5%;animation:kb 26s ease-in-out infinite alternate}
 .vp-zoom img{display:block;width:100%;height:100%;object-fit:cover}
 @keyframes kb{from{scale:1}to{scale:1.09}}
 .pin{position:absolute;width:0;height:0}
@@ -222,6 +222,8 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 .pin-sm .pin-dot{width:12px;height:12px;left:-6px;top:-6px;border-width:2px;background:var(--ink)}
 .pin-sm .pin-label{font-size:12px;padding:7px 11px;background:rgba(255,255,255,.85)}
 .pin-sm .pin-label::before{content:none}
+.pin-left .pin-label{left:auto;right:12px}
+@media (max-width:560px){.pin-sm .pin-label{display:none}}
 .vp.go .pin-label{animation:rise .8s ease 1.3s backwards}
 
 /* Static site extras: sheet-backed RSVP, photo wall */
@@ -607,9 +609,9 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
     </div>
     <figure class="vp fade">
       <div class="vp-zoom">
-        <img src="pinija.jpg?v=2" width="800" height="800" alt="Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel" data-i18n-alt="place.alt" loading="lazy" decoding="async">
-        <div class="pin pin-sm" style="left:29%;top:40.6%"><span class="pin-dot"></span><span class="pin-label">Hotel Pinija</span></div>
-        <div class="pin" style="left:54%;top:52.5%"><span class="pin-dot"></span><span class="pin-label" data-i18n="place.pin">Hier feiern wir</span></div>
+        <img src="pinija.jpg?v=3" width="1600" height="1200" alt="Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel" data-i18n-alt="place.alt" loading="lazy" decoding="async">
+        <div class="pin pin-sm pin-left" style="left:82.3%;top:43.5%"><span class="pin-dot"></span><span class="pin-label">Hotel Pinija</span></div>
+        <div class="pin" style="left:47%;top:48.5%"><span class="pin-dot"></span><span class="pin-label" data-i18n="place.pin">Hier feiern wir</span></div>
       </div>
     </figure>
     <figure class="plan pop">
