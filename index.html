@@ -547,6 +547,11 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
   .count b{font-size:32px}
   .count span{font-size:10.5px;letter-spacing:.06em;white-space:nowrap}
 }
+.counts{display:flex;flex-wrap:wrap;gap:12px 24px}
+.cnt{display:flex;flex-direction:column;gap:6px}
+.cnt-l{font-size:14px;color:var(--muted)}
+.person.kid{background:var(--blush)}
+@media (max-width:560px){.counts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.counts .stepper button{width:38px;height:38px;font-size:20px}.counts .stepper output{min-width:34px;font-size:22px}}
 </style>
 </head>
 <body>
@@ -649,11 +654,20 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
           </div>
         </fieldset>
         <div class="field" id="r-count-wrap" hidden>
-          <span class="lbl" id="r-count-l" data-i18n="rsvp.count">Wie viele Personen?</span>
-          <div class="stepper" role="group" aria-labelledby="r-count-l">
-            <button type="button" id="r-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
-            <output id="r-n" aria-live="polite">2</output>
-            <button type="button" id="r-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
+          <span class="lbl" data-i18n="rsvp.count">Wie viele Personen?</span>
+          <div class="counts">
+            <div class="cnt"><span class="cnt-l" id="r-a-l" data-i18n="rsvp.adults">Erwachsene</span>
+              <div class="stepper" role="group" aria-labelledby="r-a-l">
+                <button type="button" id="r-a-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
+                <output id="r-a" aria-live="polite">2</output>
+                <button type="button" id="r-a-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
+              </div></div>
+            <div class="cnt"><span class="cnt-l" id="r-k-l" data-i18n="rsvp.kids">Kinder</span>
+              <div class="stepper" role="group" aria-labelledby="r-k-l">
+                <button type="button" id="r-k-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
+                <output id="r-k" aria-live="polite">0</output>
+                <button type="button" id="r-k-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
+              </div></div>
           </div>
         </div>
         <div id="r-people"></div>
@@ -977,7 +991,8 @@ de:{
 "wx.title":"Wetter am Hochzeitstag","wx.night":"Nacht","wx.live":"Live-Prognose","wx.clim":"Klimawerte","wx.k.sun":"Sonnig","wx.k.partly":"Leicht bewölkt","wx.k.cloud":"Bewölkt","wx.k.rain":"Regen möglich","wx.k.storm":"Gewitter möglich","wx.rain":"Regen","wx.wind":"Wind","wx.sunset":"Sonnenuntergang","wx.sea":"Meer","wx.upd":"Prognose für den 28. August, aktualisiert um {t}","wx.climate":"Die echte Prognose erscheint hier ab Mitte August. Normalerweise ist es Ende August sonnig mit 28 bis 30 °C, nachts um 20 °C.",
 "stay.early":"Tipp: Bei Buchung vor dem 30. Dezember 2026 gibt es möglicherweise zusätzlich einen Frühbucherrabatt von bis zu 20&nbsp;%. Ohne Gewähr, die genauen Konditionen seht ihr bei der Buchung beim Hotel.",
 "travel.q":"Woher reist ihr an?","travel.qh":"Tippt auf euer Land, dann seht ihr die passenden Infos.",
-"p.title":"Person {n}","p.first":"Vorname","p.last":"Nachname","p.diet":"Essenswünsche (optional)","p.otherPh":"z. B. Nussallergie","diet.kids":"Kindermenü","diet.veg":"Vegetarisch","diet.vegan":"Vegan","diet.gluten":"Glutenfrei","diet.lact":"Laktosefrei","diet.other":"Sonstiges",
+"p.title":"Person {n}","p.first":"Vorname","p.last":"Nachname","p.diet":"Essenswünsche (optional)","p.otherPh":"z. B. Nussallergie","diet.veg":"Vegetarisch","diet.vegan":"Vegan","diet.gluten":"Glutenfrei","diet.lact":"Laktosefrei","diet.other":"Sonstiges",
+"rsvp.adults":"Erwachsene","rsvp.kids":"Kinder","rsvp.kid1":"Kind","p.kid":"Kind {n}",
 "foot.love":"In Liebe","foot.text":"Wir freuen uns riesig auf euch!","foot.fam":"Familien Weiss &amp; Dalić"
 },
 hr:{
@@ -1060,7 +1075,8 @@ hr:{
 "wx.title":"Vrijeme na dan vjenčanja","wx.night":"Noć","wx.live":"Prognoza uživo","wx.clim":"Klimatski prosjek","wx.k.sun":"Sunčano","wx.k.partly":"Djelomično oblačno","wx.k.cloud":"Oblačno","wx.k.rain":"Moguća kiša","wx.k.storm":"Moguća grmljavina","wx.rain":"Kiša","wx.wind":"Vjetar","wx.sunset":"Zalazak sunca","wx.sea":"More","wx.upd":"Prognoza za 28. kolovoza, ažurirano u {t}","wx.climate":"Prava prognoza pojavit će se ovdje od sredine kolovoza. Krajem kolovoza obično je sunčano, 28 do 30 °C, noću oko 20 °C.",
 "stay.early":"Savjet: kod rezervacije prije 30. prosinca 2026. moguć je dodatni popust za ranu rezervaciju do 20&nbsp;%. Bez jamstva, točne uvjete vidjet ćete pri rezervaciji u hotelu.",
 "travel.q":"Odakle putujete?","travel.qh":"Dodirnite svoju zemlju i vidjet ćete informacije za vas.",
-"p.title":"Osoba {n}","p.first":"Ime","p.last":"Prezime","p.diet":"Prehrana (neobavezno)","p.otherPh":"npr. alergija na orašaste plodove","diet.kids":"Dječji meni","diet.veg":"Vegetarijanski","diet.vegan":"Veganski","diet.gluten":"Bez glutena","diet.lact":"Bez laktoze","diet.other":"Ostalo",
+"p.title":"Osoba {n}","p.first":"Ime","p.last":"Prezime","p.diet":"Prehrana (neobavezno)","p.otherPh":"npr. alergija na orašaste plodove","diet.veg":"Vegetarijanski","diet.vegan":"Veganski","diet.gluten":"Bez glutena","diet.lact":"Bez laktoze","diet.other":"Ostalo",
+"rsvp.adults":"Odrasli","rsvp.kids":"Djeca","rsvp.kid1":"dijete","p.kid":"Dijete {n}",
 "foot.love":"S ljubavlju","foot.text":"Jako se veselimo vama!","foot.fam":"Obitelji Weiss i Dalić"
 },
 cs:{
@@ -1143,7 +1159,8 @@ cs:{
 "wx.title":"Počasí ve svatební den","wx.night":"Noc","wx.live":"Aktuální předpověď","wx.clim":"Klimatický průměr","wx.k.sun":"Slunečno","wx.k.partly":"Polojasno","wx.k.cloud":"Zataženo","wx.k.rain":"Možný déšť","wx.k.storm":"Možné bouřky","wx.rain":"Déšť","wx.wind":"Vítr","wx.sunset":"Západ slunce","wx.sea":"Moře","wx.upd":"Předpověď na 28. srpna, aktualizováno v {t}","wx.climate":"Skutečná předpověď se tu objeví od poloviny srpna. Koncem srpna bývá obvykle slunečno, 28 až 30 °C, v noci kolem 20 °C.",
 "stay.early":"Tip: při rezervaci před 30. prosincem 2026 může být navíc k dispozici sleva za včasnou rezervaci až 20&nbsp;%. Bez záruky, přesné podmínky uvidíte při rezervaci v hotelu.",
 "travel.q":"Odkud k nám pojedete?","travel.qh":"Klepněte na svou zemi a uvidíte informace pro vás.",
-"p.title":"Osoba {n}","p.first":"Jméno","p.last":"Příjmení","p.diet":"Strava (nepovinné)","p.otherPh":"např. alergie na ořechy","diet.kids":"Dětské menu","diet.veg":"Vegetariánské","diet.vegan":"Veganské","diet.gluten":"Bez lepku","diet.lact":"Bez laktózy","diet.other":"Jiné",
+"p.title":"Osoba {n}","p.first":"Jméno","p.last":"Příjmení","p.diet":"Strava (nepovinné)","p.otherPh":"např. alergie na ořechy","diet.veg":"Vegetariánské","diet.vegan":"Veganské","diet.gluten":"Bez lepku","diet.lact":"Bez laktózy","diet.other":"Jiné",
+"rsvp.adults":"Dospělí","rsvp.kids":"Děti","rsvp.kid1":"dítě","p.kid":"Dítě {n}",
 "foot.love":"S láskou","foot.text":"Moc se na vás těšíme!","foot.fam":"Rodiny Weiss a Dalić"
 }};
 
@@ -1402,22 +1419,28 @@ document.querySelector(".hero .names").addEventListener("click",e=>confetti(e.cl
 
 /* RSVP: number of people, first and last name per person, diet as tick boxes */
 let RSVP_PHONE=""; // kommt aus dem Admin-Sheet (Einstellungen > whatsapp), steht bewusst nicht im Code
-const DIETS=["kids","veg","vegan","gluten","lact","other"];
-const R={yes:null,n:2,p:[]};
-function person(i){ if(!R.p[i]) R.p[i]={f:"",l:"",d:{},o:""}; return R.p[i]; }
-function peopleCount(){ return R.yes===false?1:R.n; }
+const DIETS=["veg","vegan","gluten","lact","other"];
+const R={yes:null,a:2,k:0,pa:[],pk:[]};
+function mk(){ return {f:"",l:"",d:{},o:""}; }
+function people(){ // [{x, kid, idx}]
+  if(R.yes===false){ if(!R.pa[0]) R.pa[0]=mk(); return [{x:R.pa[0],kid:false,idx:0}]; }
+  const out=[]; for(let i=0;i<R.a;i++){ if(!R.pa[i]) R.pa[i]=mk(); out.push({x:R.pa[i],kid:false,idx:i}); }
+  for(let i=0;i<R.k;i++){ if(!R.pk[i]) R.pk[i]=mk(); out.push({x:R.pk[i],kid:true,idx:i}); }
+  return out;
+}
 function fullName(x){ return (x.f.trim()+" "+x.l.trim()).trim(); }
 function dietText(x,L){ const D=I18N[L]||I18N.de; const out=DIETS.filter(k=>x.d[k]&&k!=="other").map(k=>D["diet."+k]); if(x.d.other) out.push((D["diet.other"]||"")+(x.o.trim()?": "+x.o.trim():"")); return out.join(", "); }
-function rsvpReady(){ if(R.yes===null) return false; for(let i=0;i<peopleCount();i++){ const x=person(i); if(!x.f.trim()||!x.l.trim()) return false; } return true; }
+function rsvpReady(){ if(R.yes===null) return false; return people().every(p=>p.x.f.trim()&&p.x.l.trim()); }
 function rsvpPayload(){
-  const ppl=[...Array(peopleCount()).keys()].map(person);
-  const food=R.yes?ppl.map(x=>{ const d=dietText(x,"de"); return d?fullName(x)+": "+d:""; }).filter(Boolean).join("; "):"";
-  return {name:ppl.map(fullName).join(", "),food};
+  const ppl=people(), kidTag=" ("+I18N.de["rsvp.kid1"]+")";
+  const nm=p=>fullName(p.x)+(p.kid?kidTag:"");
+  const food=R.yes?ppl.map(p=>{ const d=dietText(p.x,"de"); return d?nm(p)+": "+d:""; }).filter(Boolean).join("; "):"";
+  return {name:ppl.map(nm).join(", "),food,n:R.yes?R.a+R.k:0};
 }
 function rsvpText(){
-  const v=id=>$(id).value.trim(), pl=rsvpPayload(), ppl=[...Array(peopleCount()).keys()].map(person);
+  const v=id=>$(id).value.trim(), pl=rsvpPayload(), ppl=people();
   const L=[t("wa.hi"),t("wa.intro"),""];
-  if(R.yes){ L.push(t("wa.yes")+" "+t("wa.count")+": "+R.n); ppl.forEach(x=>{ const d=dietText(x,lang); L.push("• "+fullName(x)+(d?" ("+d+")":"")); }); if(v("r-song")) L.push(t("wa.song")+": "+v("r-song")); }
+  if(R.yes){ L.push(t("wa.yes")+" "+t("rsvp.adults")+": "+R.a+(R.k?", "+t("rsvp.kids")+": "+R.k:"")); ppl.forEach(p=>{ const d=dietText(p.x,lang); L.push("• "+fullName(p.x)+(p.kid?" ("+t("rsvp.kid1")+")":"")+(d?" ("+d+")":"")); }); if(v("r-song")) L.push(t("wa.song")+": "+v("r-song")); }
   else { L.push(t("wa.name")+": "+pl.name, t("wa.no")); }
   if(v("r-msg")) L.push("",t("wa.msg")+": "+v("r-msg"));
   return L.join("\n");
@@ -1425,17 +1448,18 @@ function rsvpText(){
 function setHint(k,warn){ const h=$("r-hint"); h.textContent=k?t(k):""; h.classList.toggle("warn",!!warn); }
 let PPL_KEY="";
 function renderPeople(){
-  const n=R.yes===null?0:peopleCount(), key=n+"|"+R.yes+"|"+lang;
+  const list=R.yes===null?[]:people(), key=R.a+"|"+R.k+"|"+R.yes+"|"+lang;
   if(key===PPL_KEY) return; PPL_KEY=key;
   const box=$("r-people"); box.replaceChildren();
-  for(let i=0;i<n;i++){
-    const x=person(i), c=document.createElement("div"); c.className="person";
-    const h=document.createElement("p"); h.className="person-t"; h.textContent=n>1?t("p.title").replace("{n}",i+1):(R.yes?t("p.title").replace("{n}",1):t("rsvp.name")); c.appendChild(h);
+  list.forEach(({x,kid,idx})=>{
+    const c=document.createElement("div"); c.className="person"+(kid?" kid":"");
+    const h=document.createElement("p"); h.className="person-t";
+    h.textContent=R.yes===false?t("rsvp.name"):(kid?t("p.kid"):t("p.title")).replace("{n}",idx+1); c.appendChild(h);
     const row=document.createElement("div"); row.className="row2";
     [["f","p.first","given-name"],["l","p.last","family-name"]].forEach(([k,lab,ac])=>{
       const w=document.createElement("label"); w.className="mini";
       const sp=document.createElement("span"); sp.textContent=t(lab); w.appendChild(sp);
-      const inp=document.createElement("input"); inp.type="text"; inp.value=x[k]; if(i===0) inp.autocomplete=ac; else inp.autocomplete="off";
+      const inp=document.createElement("input"); inp.type="text"; inp.value=x[k]; inp.autocomplete=(!kid&&idx===0)?ac:"off";
       inp.addEventListener("input",()=>{ x[k]=inp.value; renderRsvp(); }); w.appendChild(inp); row.appendChild(w);
     });
     c.appendChild(row);
@@ -1453,15 +1477,16 @@ function renderPeople(){
       c.append(chips,other);
     }
     box.appendChild(c);
-  }
+  });
 }
 function renderRsvp(){
   $("r-fields").hidden=!!DONE; $("r-done").hidden=!DONE;
   if(DONE) $("r-done-t").textContent=t(DONE);
   $("r-count-wrap").hidden=R.yes!==true;
   $("r-more").hidden=R.yes!==true;
-  $("r-n").textContent=String(R.n);
-  $("r-minus").disabled=R.n<=1; $("r-plus").disabled=R.n>=12;
+  $("r-a").textContent=String(R.a); $("r-k").textContent=String(R.k);
+  $("r-a-minus").disabled=R.a<=1; $("r-a-plus").disabled=R.a>=12;
+  $("r-k-minus").disabled=R.k<=0; $("r-k-plus").disabled=R.k>=10;
   renderPeople();
   const ok=rsvpReady(), a=$("r-send");
   a.setAttribute("aria-disabled",String(!ok));
@@ -1474,8 +1499,10 @@ document.querySelectorAll('input[name="r-yes"]').forEach(r=>r.addEventListener("
   R.yes=r.value==="yes"; renderRsvp();
   if(R.yes){ const b=r.parentElement.getBoundingClientRect(); confetti(b.left+b.width/2,b.top+b.height/2); }
 }));
-$("r-minus").addEventListener("click",()=>{ if(R.n>1){ R.n--; renderRsvp(); } });
-$("r-plus").addEventListener("click",()=>{ if(R.n<12){ R.n++; renderRsvp(); } });
+$("r-a-minus").addEventListener("click",()=>{ if(R.a>1){ R.a--; renderRsvp(); } });
+$("r-a-plus").addEventListener("click",()=>{ if(R.a<12){ R.a++; renderRsvp(); } });
+$("r-k-minus").addEventListener("click",()=>{ if(R.k>0){ R.k--; renderRsvp(); } });
+$("r-k-plus").addEventListener("click",()=>{ if(R.k<10){ R.k++; renderRsvp(); } });
 $("r-song").addEventListener("input",renderRsvp); $("r-msg").addEventListener("input",renderRsvp);
 $("r-send").addEventListener("click",e=>{
   if(!rsvpReady()){ e.preventDefault(); setHint("rsvp.need",true); focusMissing(); return; }
@@ -1534,7 +1561,7 @@ $("rsvp-form").addEventListener("submit",async()=>{
   const b=$("r-submit"), v=id=>$(id).value.trim(), pl=rsvpPayload();
   b.disabled=true; setHint("rsvp.sending");
   try{
-    const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"rsvp",name:pl.name,yes:R.yes===true,n:R.yes?R.n:0,food:pl.food,song:R.yes?v("r-song"):"",msg:v("r-msg"),lang})});
+    const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"rsvp",name:pl.name,yes:R.yes===true,n:pl.n,food:pl.food,song:R.yes?v("r-song"):"",msg:v("r-msg"),lang})});
     const j=await r.json(); if(!j||!j.ok) throw j;
     try{ localStorage.setItem("kp-rsvp",JSON.stringify({yes:R.yes===true})); }catch(e){}
     const bb=b.getBoundingClientRect();
