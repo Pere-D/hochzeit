@@ -41,7 +41,7 @@ a{color:var(--gold-d);text-underline-offset:3px}
 /* Navigation */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:16px;min-height:58px}
-.mono{font:400 28px/1 var(--f-script);text-decoration:none;white-space:nowrap;padding-top:4px}
+.mono{font:400 28px/1.15 var(--f-script);text-decoration:none;white-space:nowrap;padding:4px .35em 4px .12em;margin-left:-.12em}
 .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
 .links a:first-child{margin-left:auto}.links a:last-child{margin-right:auto}
 .links::-webkit-scrollbar{display:none}
@@ -381,7 +381,7 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
         <circle cx="10" cy="14" r="1.8"/><circle cx="290" cy="14" r="1.8"/>
       </svg>
       <p class="date" data-i18n="hero.date">Samstag, 28. August 2027</p>
-      <p class="place" data-i18n="hero.place">Hotel Pinija, Petrčane bei Zadar</p>
+      <p class="place" data-i18n="hero.place">Congress &amp; Event Center Zadar<br>Hotel Pinija, Petrčane bei Zadar</p>
       <p class="live" id="live" hidden><span class="dot" aria-hidden="true"></span><span id="live-txt"></span></p>
       <ol class="count" id="count" aria-live="off">
         <li><b id="c-d">–</b><span id="l-d">Tage</span></li>
@@ -647,7 +647,7 @@ const ETIAS='<a href="https://travel-europe.europa.eu/etias_en" target="_blank" 
 const I18N={
 de:{
 "nav.hi":"Willkommen","nav.day":"Unser Tag","nav.place":"Ort","nav.travel":"Anreise","nav.photos":"Fotos",
-"hero.kicker":"Gemeinsam mit unseren Familien laden wir euch herzlich ein","hero.date":"Samstag, 28. August 2027","hero.place":"Hotel Pinija, Petrčane bei Zadar",
+"hero.kicker":"Gemeinsam mit unseren Familien laden wir euch herzlich ein","hero.date":"Samstag, 28. August 2027","hero.place":"Congress &amp; Event Center Zadar<br>Hotel Pinija, Petrčane bei Zadar",
 "count.cap":"bis wir Ja sagen","hero.cta1":"Unser Tag","hero.cta2":"Eure Anreise",
 "hi.title":"Liebe Familie, liebe Freunde,",
 "hi.p1":"wir möchten den schönsten Tag unseres Lebens mit den Menschen feiern, die uns am meisten bedeuten: mit euch.",
@@ -725,7 +725,7 @@ de:{
 },
 hr:{
 "nav.hi":"Dobrodošli","nav.day":"Naš dan","nav.place":"Mjesto","nav.travel":"Dolazak","nav.photos":"Fotografije",
-"hero.kicker":"Zajedno s našim obiteljima srdačno vas pozivamo","hero.date":"Subota, 28. kolovoza 2027.","hero.place":"Hotel Pinija, Petrčane kraj Zadra",
+"hero.kicker":"Zajedno s našim obiteljima srdačno vas pozivamo","hero.date":"Subota, 28. kolovoza 2027.","hero.place":"Congress &amp; Event Center Zadar<br>Hotel Pinija, Petrčane kraj Zadra",
 "count.cap":"do našeg vjenčanja","hero.cta1":"Naš dan","hero.cta2":"Vaš dolazak",
 "hi.title":"Draga obitelji, dragi prijatelji,",
 "hi.p1":"najljepši dan našeg života želimo proslaviti s ljudima koji nam najviše znače: s vama.",
@@ -803,7 +803,7 @@ hr:{
 },
 cs:{
 "nav.hi":"Vítejte","nav.day":"Náš den","nav.place":"Místo","nav.travel":"Cesta","nav.photos":"Fotky",
-"hero.kicker":"Spolu s našimi rodinami vás srdečně zveme","hero.date":"Sobota 28. srpna 2027","hero.place":"Hotel Pinija, Petrčane u Zadaru",
+"hero.kicker":"Spolu s našimi rodinami vás srdečně zveme","hero.date":"Sobota 28. srpna 2027","hero.place":"Congress &amp; Event Center Zadar<br>Hotel Pinija, Petrčane u Zadaru",
 "count.cap":"do naší svatby","hero.cta1":"Náš den","hero.cta2":"Vaše cesta",
 "hi.title":"Milá rodino, milí přátelé,",
 "hi.p1":"nejkrásnější den našeho života chceme oslavit s lidmi, kteří pro nás znamenají nejvíc: s vámi.",
