@@ -526,6 +526,21 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 .lb .lb-nav.next{right:max(14px,env(safe-area-inset-right,0px))}
 .lb .lb-nav:disabled{display:none}
 @media (max-width:560px){.lb .lb-nav{width:42px;height:42px;background:rgba(0,0,0,.35)}.lb .lb-stage{padding-left:0;padding-right:0}.lb .lb-stage img{border-radius:0}}
+.person{border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;margin:0 0 14px;background:#fff;animation:rise .35s ease both}
+.rsvp .person-t{margin:0 0 10px;font:500 12px/1.4 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);max-width:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{display:block}
+.mini span{display:block;font-size:13px;color:var(--muted);margin:0 0 4px}
+.rsvp-card .person input[type="text"]{padding:11px 12px;font-size:16px}
+.rsvp .mini-l{margin:14px 0 8px;font-size:13px;color:var(--muted);max-width:none;text-align:left}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--gold-l);border-radius:999px;cursor:pointer;font-size:14px;transition:background .2s,color .2s,border-color .2s;user-select:none}
+.chip::before{content:"";width:14px;height:14px;border-radius:4px;border:1.5px solid var(--gold);flex:none}
+.chip:has(input:checked){background:var(--ink);border-color:var(--ink);color:#fff}
+.chip:has(input:checked)::before{background:var(--gold-l) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23151412' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;border-color:var(--gold-l)}
+.chip:has(input:focus-visible){outline:2px solid var(--gold-d);outline-offset:2px}
+.rsvp-card .person input.other{margin-top:10px}
+@media (max-width:420px){.row2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -620,7 +635,6 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
       <form class="rsvp-card" id="rsvp-form" novalidate>
         <div class="rsvp-done" id="r-done" hidden><p class="done-t" id="r-done-t"></p><button type="button" class="btn ghost sm" id="r-again" data-i18n="rsvp.again">Antwort ändern</button></div>
         <div id="r-fields">
-        <div class="field"><label for="r-name" data-i18n="rsvp.name">Euer Name</label><input type="text" id="r-name" autocomplete="name" data-i18n-ph="rsvp.namePh"></div>
         <fieldset class="field">
           <legend data-i18n="rsvp.q">Kommt ihr?</legend>
           <div class="choice">
@@ -628,16 +642,16 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
             <label><input class="vh" type="radio" name="r-yes" value="no"><span data-i18n="rsvp.no">Leider nicht</span></label>
           </div>
         </fieldset>
-        <div id="r-more" hidden>
-          <div class="field">
-            <span class="lbl" id="r-count-l" data-i18n="rsvp.count">Wie viele Personen?</span>
-            <div class="stepper" role="group" aria-labelledby="r-count-l">
-              <button type="button" id="r-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
-              <output id="r-n" aria-live="polite">2</output>
-              <button type="button" id="r-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
-            </div>
+        <div class="field" id="r-count-wrap" hidden>
+          <span class="lbl" id="r-count-l" data-i18n="rsvp.count">Wie viele Personen?</span>
+          <div class="stepper" role="group" aria-labelledby="r-count-l">
+            <button type="button" id="r-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
+            <output id="r-n" aria-live="polite">2</output>
+            <button type="button" id="r-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
           </div>
-          <div class="field"><label for="r-food" data-i18n="rsvp.food">Essenswünsche oder Allergien</label><input type="text" id="r-food" data-i18n-ph="rsvp.foodPh"></div>
+        </div>
+        <div id="r-people"></div>
+        <div id="r-more" hidden>
           <div class="field"><label for="r-song" data-i18n="rsvp.song">Euer Song für die Tanzfläche</label><input type="text" id="r-song" data-i18n-ph="rsvp.songPh"></div>
         </div>
         <div class="field"><label for="r-msg" data-i18n="rsvp.msg">Eine Nachricht an uns</label><textarea id="r-msg" rows="3" data-i18n-ph="rsvp.msgPh"></textarea></div>
@@ -941,13 +955,13 @@ de:{
 "s2.t":"Nin und Königinnenstrand","s2.k":"ca. 15 Min. mit dem Auto","s2.d":"Feiner Sandstrand mit flachem, warmem Wasser und das kleine historische Städtchen Nin. Perfekt für einen Badetag.",
 "s3.t":"Nationalpark Krka","s3.k":"ca. 1 Std. mit dem Auto","s3.d":"Rauschende Wasserfälle und Holzstege durch das grüne Flusstal. Am besten früh hinfahren und Tickets online kaufen.",
 "s4.t":"Kornati","s4.k":"Bootsausflug ab Zadar","s4.d":"Ein Tag auf dem Boot zwischen unzähligen kleinen Inseln, mit Baden im glasklaren Wasser.",
-"rsvp.name":"Euer Name","rsvp.namePh":"z. B. Anna und Marko","rsvp.q":"Kommt ihr?","rsvp.yes":"Ja, wir sind dabei!","rsvp.no":"Leider nicht",
+"rsvp.name":"Dein Name","rsvp.namePh":"z. B. Anna und Marko","rsvp.q":"Kommt ihr?","rsvp.yes":"Ja, wir sind dabei!","rsvp.no":"Leider nicht",
 "rsvp.count":"Wie viele Personen?","rsvp.less":"Weniger","rsvp.more":"Mehr",
 "rsvp.food":"Essenswünsche oder Allergien","rsvp.foodPh":"z. B. vegetarisch, laktosefrei",
 "rsvp.song":"Euer Song für die Tanzfläche","rsvp.songPh":"Song und Interpret",
 "rsvp.msg":"Eine Nachricht an uns","rsvp.msgPh":"Optional",
 "rsvp.send":"Per WhatsApp senden","rsvp.hint":"WhatsApp öffnet sich mit eurer fertigen Nachricht. Ihr müsst nur noch auf Senden tippen.",
-"rsvp.need":"Bitte tragt euren Namen ein und wählt, ob ihr kommt.","rsvp.thanks":"Danke! Jetzt nur noch in WhatsApp auf Senden tippen.",
+"rsvp.need":"Bitte wählt, ob ihr kommt, und tragt für jede Person Vor- und Nachnamen ein.","rsvp.thanks":"Danke! Jetzt nur noch in WhatsApp auf Senden tippen.",
 "wa.hi":"Hallo Kim und Pere! 💛","wa.intro":"Unsere Antwort für eure Hochzeit am 28.8.2027:","wa.name":"Name","wa.yes":"Wir sind dabei!","wa.count":"Personen","wa.no":"Leider können wir nicht kommen.","wa.food":"Essenswünsche","wa.song":"Songwunsch","wa.msg":"Nachricht",
 "photos.share":"Am einfachsten per WhatsApp. Tipp: Als Dokument gesendet bleiben die Fotos in voller Qualität.","photos.wa":"Fotos per WhatsApp schicken","photos.album":"Zum Fotoalbum","wa.photos":"Hallo Kim und Pere! Hier sind unsere Fotos von eurer Hochzeit 📸",
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
@@ -957,6 +971,7 @@ de:{
 "wx.title":"Wetter am Hochzeitstag","wx.night":"Nacht","wx.live":"Live-Prognose","wx.clim":"Klimawerte","wx.k.sun":"Sonnig","wx.k.partly":"Leicht bewölkt","wx.k.cloud":"Bewölkt","wx.k.rain":"Regen möglich","wx.k.storm":"Gewitter möglich","wx.rain":"Regen","wx.wind":"Wind","wx.sunset":"Sonnenuntergang","wx.sea":"Meer","wx.upd":"Prognose für den 28. August, aktualisiert um {t}","wx.climate":"Die echte Prognose erscheint hier ab Mitte August. Normalerweise ist es Ende August sonnig mit 28 bis 30 °C, nachts um 20 °C.",
 "stay.early":"Tipp: Bei Buchung vor dem 30. Dezember 2026 gibt es möglicherweise zusätzlich einen Frühbucherrabatt von bis zu 20&nbsp;%. Ohne Gewähr, die genauen Konditionen seht ihr bei der Buchung beim Hotel.",
 "travel.q":"Woher reist ihr an?","travel.qh":"Tippt auf euer Land, dann seht ihr die passenden Infos.",
+"p.title":"Person {n}","p.first":"Vorname","p.last":"Nachname","p.diet":"Essenswünsche (optional)","p.otherPh":"z. B. Nussallergie","diet.veg":"Vegetarisch","diet.vegan":"Vegan","diet.gluten":"Glutenfrei","diet.lact":"Laktosefrei","diet.other":"Sonstiges",
 "foot.love":"In Liebe","foot.text":"Wir freuen uns riesig auf euch!","foot.fam":"Familien Weiss &amp; Dalić"
 },
 hr:{
@@ -1029,7 +1044,7 @@ hr:{
 "rsvp.song":"Vaša pjesma za plesni podij","rsvp.songPh":"Pjesma i izvođač",
 "rsvp.msg":"Poruka za nas","rsvp.msgPh":"Neobavezno",
 "rsvp.send":"Pošalji preko WhatsAppa","rsvp.hint":"WhatsApp se otvara s gotovom porukom. Samo još dodirnite Pošalji.",
-"rsvp.need":"Upišite svoje ime i odaberite dolazite li.","rsvp.thanks":"Hvala! Još samo dodirnite Pošalji u WhatsAppu.",
+"rsvp.need":"Odaberite dolazite li i upišite ime i prezime za svaku osobu.","rsvp.thanks":"Hvala! Još samo dodirnite Pošalji u WhatsAppu.",
 "wa.hi":"Bok Kim i Pere! 💛","wa.intro":"Naš odgovor za vaše vjenčanje 28.8.2027.:","wa.name":"Ime","wa.yes":"Dolazimo!","wa.count":"Broj osoba","wa.no":"Nažalost ne možemo doći.","wa.food":"Hrana","wa.song":"Želja za pjesmu","wa.msg":"Poruka",
 "photos.share":"Najjednostavnije preko WhatsAppa. Savjet: pošaljete li ih kao dokument, fotografije ostaju u punoj kvaliteti.","photos.wa":"Pošalji fotografije preko WhatsAppa","photos.album":"Otvori foto album","wa.photos":"Bok Kim i Pere! Evo naših fotografija s vašeg vjenčanja 📸",
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
@@ -1039,6 +1054,7 @@ hr:{
 "wx.title":"Vrijeme na dan vjenčanja","wx.night":"Noć","wx.live":"Prognoza uživo","wx.clim":"Klimatski prosjek","wx.k.sun":"Sunčano","wx.k.partly":"Djelomično oblačno","wx.k.cloud":"Oblačno","wx.k.rain":"Moguća kiša","wx.k.storm":"Moguća grmljavina","wx.rain":"Kiša","wx.wind":"Vjetar","wx.sunset":"Zalazak sunca","wx.sea":"More","wx.upd":"Prognoza za 28. kolovoza, ažurirano u {t}","wx.climate":"Prava prognoza pojavit će se ovdje od sredine kolovoza. Krajem kolovoza obično je sunčano, 28 do 30 °C, noću oko 20 °C.",
 "stay.early":"Savjet: kod rezervacije prije 30. prosinca 2026. moguć je dodatni popust za ranu rezervaciju do 20&nbsp;%. Bez jamstva, točne uvjete vidjet ćete pri rezervaciji u hotelu.",
 "travel.q":"Odakle putujete?","travel.qh":"Dodirnite svoju zemlju i vidjet ćete informacije za vas.",
+"p.title":"Osoba {n}","p.first":"Ime","p.last":"Prezime","p.diet":"Prehrana (neobavezno)","p.otherPh":"npr. alergija na orašaste plodove","diet.veg":"Vegetarijanski","diet.vegan":"Veganski","diet.gluten":"Bez glutena","diet.lact":"Bez laktoze","diet.other":"Ostalo",
 "foot.love":"S ljubavlju","foot.text":"Jako se veselimo vama!","foot.fam":"Obitelji Weiss i Dalić"
 },
 cs:{
@@ -1111,7 +1127,7 @@ cs:{
 "rsvp.song":"Vaše písnička na taneční parket","rsvp.songPh":"Písnička a interpret",
 "rsvp.msg":"Zpráva pro nás","rsvp.msgPh":"Nepovinné",
 "rsvp.send":"Odeslat přes WhatsApp","rsvp.hint":"WhatsApp se otevře s hotovou zprávou. Stačí jen klepnout na Odeslat.",
-"rsvp.need":"Vyplňte prosím jméno a vyberte, zda přijedete.","rsvp.thanks":"Díky! Teď už jen klepněte ve WhatsAppu na Odeslat.",
+"rsvp.need":"Vyberte prosím, zda přijedete, a vyplňte jméno a příjmení každé osoby.","rsvp.thanks":"Díky! Teď už jen klepněte ve WhatsAppu na Odeslat.",
 "wa.hi":"Ahoj Kim a Pere! 💛","wa.intro":"Naše odpověď na vaši svatbu 28. 8. 2027:","wa.name":"Jméno","wa.yes":"Přijedeme!","wa.count":"Počet osob","wa.no":"Bohužel nemůžeme přijet.","wa.food":"Jídlo","wa.song":"Písnička","wa.msg":"Zpráva",
 "photos.share":"Nejjednodušší je poslat je přes WhatsApp. Tip: když je pošlete jako dokument, zůstanou v plné kvalitě.","photos.wa":"Poslat fotky přes WhatsApp","photos.album":"Otevřít fotoalbum","wa.photos":"Ahoj Kim a Pere! Tady jsou naše fotky z vaší svatby 📸",
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
@@ -1121,6 +1137,7 @@ cs:{
 "wx.title":"Počasí ve svatební den","wx.night":"Noc","wx.live":"Aktuální předpověď","wx.clim":"Klimatický průměr","wx.k.sun":"Slunečno","wx.k.partly":"Polojasno","wx.k.cloud":"Zataženo","wx.k.rain":"Možný déšť","wx.k.storm":"Možné bouřky","wx.rain":"Déšť","wx.wind":"Vítr","wx.sunset":"Západ slunce","wx.sea":"Moře","wx.upd":"Předpověď na 28. srpna, aktualizováno v {t}","wx.climate":"Skutečná předpověď se tu objeví od poloviny srpna. Koncem srpna bývá obvykle slunečno, 28 až 30 °C, v noci kolem 20 °C.",
 "stay.early":"Tip: při rezervaci před 30. prosincem 2026 může být navíc k dispozici sleva za včasnou rezervaci až 20&nbsp;%. Bez záruky, přesné podmínky uvidíte při rezervaci v hotelu.",
 "travel.q":"Odkud k nám pojedete?","travel.qh":"Klepněte na svou zemi a uvidíte informace pro vás.",
+"p.title":"Osoba {n}","p.first":"Jméno","p.last":"Příjmení","p.diet":"Strava (nepovinné)","p.otherPh":"např. alergie na ořechy","diet.veg":"Vegetariánské","diet.vegan":"Veganské","diet.gluten":"Bez lepku","diet.lact":"Bez laktózy","diet.other":"Jiné",
 "foot.love":"S láskou","foot.text":"Moc se na vás těšíme!","foot.fam":"Rodiny Weiss a Dalić"
 }};
 
@@ -1377,40 +1394,85 @@ function confetti(x,y){
 }
 document.querySelector(".hero .names").addEventListener("click",e=>confetti(e.clientX,e.clientY));
 
-/* RSVP: builds a ready-made WhatsApp message */
+/* RSVP: number of people, first and last name per person, diet as tick boxes */
 let RSVP_PHONE=""; // kommt aus dem Admin-Sheet (Einstellungen > whatsapp), steht bewusst nicht im Code
-const R={yes:null,n:2};
-function rsvpReady(){ return !!$("r-name").value.trim()&&R.yes!==null; }
+const DIETS=["veg","vegan","gluten","lact","other"];
+const R={yes:null,n:2,p:[]};
+function person(i){ if(!R.p[i]) R.p[i]={f:"",l:"",d:{},o:""}; return R.p[i]; }
+function peopleCount(){ return R.yes===false?1:R.n; }
+function fullName(x){ return (x.f.trim()+" "+x.l.trim()).trim(); }
+function dietText(x,L){ const D=I18N[L]||I18N.de; const out=DIETS.filter(k=>x.d[k]&&k!=="other").map(k=>D["diet."+k]); if(x.d.other) out.push((D["diet.other"]||"")+(x.o.trim()?": "+x.o.trim():"")); return out.join(", "); }
+function rsvpReady(){ if(R.yes===null) return false; for(let i=0;i<peopleCount();i++){ const x=person(i); if(!x.f.trim()||!x.l.trim()) return false; } return true; }
+function rsvpPayload(){
+  const ppl=[...Array(peopleCount()).keys()].map(person);
+  const food=R.yes?ppl.map(x=>{ const d=dietText(x,"de"); return d?fullName(x)+": "+d:""; }).filter(Boolean).join("; "):"";
+  return {name:ppl.map(fullName).join(", "),food};
+}
 function rsvpText(){
-  const v=id=>$(id).value.trim();
-  const L=[t("wa.hi"),t("wa.intro"),"",t("wa.name")+": "+v("r-name")];
-  if(R.yes){ L.push(t("wa.yes")+" "+t("wa.count")+": "+R.n); if(v("r-food")) L.push(t("wa.food")+": "+v("r-food")); if(v("r-song")) L.push(t("wa.song")+": "+v("r-song")); }
-  else L.push(t("wa.no"));
+  const v=id=>$(id).value.trim(), pl=rsvpPayload(), ppl=[...Array(peopleCount()).keys()].map(person);
+  const L=[t("wa.hi"),t("wa.intro"),""];
+  if(R.yes){ L.push(t("wa.yes")+" "+t("wa.count")+": "+R.n); ppl.forEach(x=>{ const d=dietText(x,lang); L.push("• "+fullName(x)+(d?" ("+d+")":"")); }); if(v("r-song")) L.push(t("wa.song")+": "+v("r-song")); }
+  else { L.push(t("wa.name")+": "+pl.name, t("wa.no")); }
   if(v("r-msg")) L.push("",t("wa.msg")+": "+v("r-msg"));
   return L.join("\n");
 }
-function setHint(k,warn){ const h=$("r-hint"); h.textContent=t(k); h.classList.toggle("warn",!!warn); }
+function setHint(k,warn){ const h=$("r-hint"); h.textContent=k?t(k):""; h.classList.toggle("warn",!!warn); }
+let PPL_KEY="";
+function renderPeople(){
+  const n=R.yes===null?0:peopleCount(), key=n+"|"+R.yes+"|"+lang;
+  if(key===PPL_KEY) return; PPL_KEY=key;
+  const box=$("r-people"); box.replaceChildren();
+  for(let i=0;i<n;i++){
+    const x=person(i), c=document.createElement("div"); c.className="person";
+    const h=document.createElement("p"); h.className="person-t"; h.textContent=n>1?t("p.title").replace("{n}",i+1):(R.yes?t("p.title").replace("{n}",1):t("rsvp.name")); c.appendChild(h);
+    const row=document.createElement("div"); row.className="row2";
+    [["f","p.first","given-name"],["l","p.last","family-name"]].forEach(([k,lab,ac])=>{
+      const w=document.createElement("label"); w.className="mini";
+      const sp=document.createElement("span"); sp.textContent=t(lab); w.appendChild(sp);
+      const inp=document.createElement("input"); inp.type="text"; inp.value=x[k]; if(i===0) inp.autocomplete=ac; else inp.autocomplete="off";
+      inp.addEventListener("input",()=>{ x[k]=inp.value; renderRsvp(); }); w.appendChild(inp); row.appendChild(w);
+    });
+    c.appendChild(row);
+    if(R.yes){
+      const dl=document.createElement("p"); dl.className="mini-l"; dl.textContent=t("p.diet"); c.appendChild(dl);
+      const chips=document.createElement("div"); chips.className="chips";
+      const other=document.createElement("input"); other.type="text"; other.className="other"; other.placeholder=t("p.otherPh"); other.value=x.o; other.hidden=!x.d.other;
+      other.addEventListener("input",()=>{ x.o=other.value; renderRsvp(); });
+      DIETS.forEach(k=>{
+        const lb=document.createElement("label"); lb.className="chip";
+        const cb=document.createElement("input"); cb.type="checkbox"; cb.className="vh"; cb.checked=!!x.d[k];
+        cb.addEventListener("change",()=>{ x.d[k]=cb.checked; if(k==="other"){ other.hidden=!cb.checked; if(cb.checked) other.focus(); } renderRsvp(); });
+        const sp=document.createElement("span"); sp.textContent=t("diet."+k); lb.append(cb,sp); chips.appendChild(lb);
+      });
+      c.append(chips,other);
+    }
+    box.appendChild(c);
+  }
+}
 function renderRsvp(){
   $("r-fields").hidden=!!DONE; $("r-done").hidden=!DONE;
   if(DONE) $("r-done-t").textContent=t(DONE);
+  $("r-count-wrap").hidden=R.yes!==true;
   $("r-more").hidden=R.yes!==true;
   $("r-n").textContent=String(R.n);
   $("r-minus").disabled=R.n<=1; $("r-plus").disabled=R.n>=12;
+  renderPeople();
   const ok=rsvpReady(), a=$("r-send");
   a.setAttribute("aria-disabled",String(!ok));
   a.href=ok?"https://wa.me/"+RSVP_PHONE+"?text="+encodeURIComponent(rsvpText()):"#zusage";
-  if(ok&&$("r-hint").classList.contains("warn")) setHint("rsvp.hint");
+  if(ok&&$("r-hint").classList.contains("warn")) setHint("");
 }
+function focusMissing(){ const f=[...$("r-people").querySelectorAll("input[type=text]:not(.other)")].find(i=>!i.value.trim()); if(f) f.focus(); }
 $("rsvp-form").addEventListener("submit",e=>e.preventDefault());
-$("rsvp-form").addEventListener("input",renderRsvp);
 document.querySelectorAll('input[name="r-yes"]').forEach(r=>r.addEventListener("change",()=>{
   R.yes=r.value==="yes"; renderRsvp();
   if(R.yes){ const b=r.parentElement.getBoundingClientRect(); confetti(b.left+b.width/2,b.top+b.height/2); }
 }));
 $("r-minus").addEventListener("click",()=>{ if(R.n>1){ R.n--; renderRsvp(); } });
 $("r-plus").addEventListener("click",()=>{ if(R.n<12){ R.n++; renderRsvp(); } });
+$("r-song").addEventListener("input",renderRsvp); $("r-msg").addEventListener("input",renderRsvp);
 $("r-send").addEventListener("click",e=>{
-  if(!rsvpReady()){ e.preventDefault(); setHint("rsvp.need",true); if(!$("r-name").value.trim()) $("r-name").focus(); return; }
+  if(!rsvpReady()){ e.preventDefault(); setHint("rsvp.need",true); focusMissing(); return; }
   setHint("rsvp.thanks");
 });
 
@@ -1459,19 +1521,21 @@ function loadContent(){
 /* RSVP into the sheet; WhatsApp stays as the fallback */
 try{ const s=JSON.parse(localStorage.getItem("kp-rsvp")||"null"); if(s) DONE=s.yes?"rsvp.ok":"rsvp.okNo"; }catch(e){}
 if(!API){ $("r-submit").hidden=true; $("r-send").className="btn send"; }
-$("r-again").addEventListener("click",()=>{ DONE=null; renderRsvp(); $("r-name").focus(); });
+$("r-again").addEventListener("click",()=>{ DONE=null; PPL_KEY=""; renderRsvp(); $("zusage").scrollIntoView({behavior:REDUCED?"auto":"smooth",block:"start"}); });
 $("rsvp-form").addEventListener("submit",async()=>{
   if(!API) return;
-  if(!rsvpReady()){ setHint("rsvp.need",true); if(!$("r-name").value.trim()) $("r-name").focus(); return; }
-  const b=$("r-submit"), v=id=>$(id).value.trim();
+  if(!rsvpReady()){ setHint("rsvp.need",true); focusMissing(); return; }
+  const b=$("r-submit"), v=id=>$(id).value.trim(), pl=rsvpPayload();
   b.disabled=true; setHint("rsvp.sending");
   try{
-    const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"rsvp",name:v("r-name"),yes:R.yes===true,n:R.n,food:R.yes?v("r-food"):"",song:R.yes?v("r-song"):"",msg:v("r-msg"),lang})});
+    const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"rsvp",name:pl.name,yes:R.yes===true,n:R.yes?R.n:0,food:pl.food,song:R.yes?v("r-song"):"",msg:v("r-msg"),lang})});
     const j=await r.json(); if(!j||!j.ok) throw j;
     try{ localStorage.setItem("kp-rsvp",JSON.stringify({yes:R.yes===true})); }catch(e){}
     const bb=b.getBoundingClientRect();
     DONE=R.yes?"rsvp.ok":"rsvp.okNo"; setHint(""); renderRsvp();
-    if(R.yes) confetti(bb.left+bb.width/2,bb.top);
+    // Formular klappt zusammen: sanft zur Danke-Meldung scrollen, dann Konfetti
+    $("zusage").scrollIntoView({behavior:REDUCED?"auto":"smooth",block:"start"});
+    if(R.yes) setTimeout(()=>{ const d=$("r-done").getBoundingClientRect(); confetti(d.left+d.width/2,d.top+20); },REDUCED?0:600);
   }catch(err){ setHint("rsvp.err",true); }
   b.disabled=false;
 });

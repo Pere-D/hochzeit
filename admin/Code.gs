@@ -88,7 +88,7 @@ function clip(v, n) { return String(v == null ? '' : v).slice(0, n).trim(); }
 function cell(v) { return /^[=+\-@]/.test(v) ? "'" + v : v; }
 
 function saveRsvp(d) {
-  const name = clip(d.name, 120);
+  const name = clip(d.name, 600);
   if (!name) return { ok: false, error: 'name' };
   const yes = d.yes === true;
   const n = yes ? Math.max(1, Math.min(20, parseInt(d.n, 10) || 1)) : 0;
@@ -97,7 +97,7 @@ function saveRsvp(d) {
   try {
     book().getSheetByName(SHEET_RSVP).appendRow([
       new Date(), cell(name), yes ? 'Ja' : 'Nein', n,
-      cell(clip(d.food, 300)), cell(clip(d.song, 200)), cell(clip(d.msg, 1000)), clip(d.lang, 5)
+      cell(clip(d.food, 1500)), cell(clip(d.song, 200)), cell(clip(d.msg, 1000)), clip(d.lang, 5)
     ]);
   } finally {
     lock.releaseLock();
