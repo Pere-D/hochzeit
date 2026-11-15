@@ -511,11 +511,11 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
     <a class="mono foil" href="#top" aria-label="Kim &amp; Pere">K &amp; P</a>
     <nav class="links" aria-label="Seiten">
       <a href="#willkommen" data-i18n="nav.hi">Willkommen</a>
+      <a href="#zusage" data-i18n="nav.rsvp">Zusage</a>
       <a href="#tag" data-i18n="nav.day">Unser Tag</a>
       <a href="#ort" data-i18n="nav.place">Ort</a>
       <a href="#anreise" data-i18n="nav.travel">Anreise</a>
       <a href="#infos" data-i18n="nav.info">Infos</a>
-      <a href="#zusage" data-i18n="nav.rsvp">Zusage</a>
       <a href="#fotos" data-i18n="nav.photos">Fotos</a>
     </nav>
     <div class="lang" role="group" aria-label="Sprache / Jezik / Jazyk">
@@ -588,6 +588,43 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
       <li><b data-n="1">1</b><span data-i18n="st.day">unvergesslicher Tag</span></li>
     </ul>
   </div>
+
+  <section class="rsvp" id="zusage" aria-labelledby="h-rsvp">
+    <div class="wrap">
+      <h2 id="h-rsvp" class="foil" data-i18n="rsvp.title">Seid ihr dabei?</h2>
+      <p data-i18n="rsvp.text">Bitte gebt uns Bescheid, ob ihr mitfeiert. Wir hoffen von Herzen, dass ihr dabei seid!</p>
+      <p class="by" data-i18n="rsvp.by">bis zum 30. April 2027</p>
+      <form class="rsvp-card" id="rsvp-form" novalidate>
+        <div class="rsvp-done" id="r-done" hidden><p class="done-t" id="r-done-t"></p><button type="button" class="btn ghost sm" id="r-again" data-i18n="rsvp.again">Antwort ändern</button></div>
+        <div id="r-fields">
+        <div class="field"><label for="r-name" data-i18n="rsvp.name">Euer Name</label><input type="text" id="r-name" autocomplete="name" data-i18n-ph="rsvp.namePh"></div>
+        <fieldset class="field">
+          <legend data-i18n="rsvp.q">Kommt ihr?</legend>
+          <div class="choice">
+            <label><input class="vh" type="radio" name="r-yes" value="yes"><span data-i18n="rsvp.yes">Ja, wir sind dabei!</span></label>
+            <label><input class="vh" type="radio" name="r-yes" value="no"><span data-i18n="rsvp.no">Leider nicht</span></label>
+          </div>
+        </fieldset>
+        <div id="r-more" hidden>
+          <div class="field">
+            <span class="lbl" id="r-count-l" data-i18n="rsvp.count">Wie viele Personen?</span>
+            <div class="stepper" role="group" aria-labelledby="r-count-l">
+              <button type="button" id="r-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
+              <output id="r-n" aria-live="polite">2</output>
+              <button type="button" id="r-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
+            </div>
+          </div>
+          <div class="field"><label for="r-food" data-i18n="rsvp.food">Essenswünsche oder Allergien</label><input type="text" id="r-food" data-i18n-ph="rsvp.foodPh"></div>
+          <div class="field"><label for="r-song" data-i18n="rsvp.song">Euer Song für die Tanzfläche</label><input type="text" id="r-song" data-i18n-ph="rsvp.songPh"></div>
+        </div>
+        <div class="field"><label for="r-msg" data-i18n="rsvp.msg">Eine Nachricht an uns</label><textarea id="r-msg" rows="3" data-i18n-ph="rsvp.msgPh"></textarea></div>
+        <button type="submit" class="btn send" id="r-submit"><span data-i18n="rsvp.submit">Antwort senden</span></button>
+        <p class="alt-line"><a class="alt-link" id="r-send" href="#zusage" target="_blank" rel="noopener" aria-disabled="true"><svg class="bubble" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.4 18.6z"/></svg><span data-i18n="rsvp.wa">Lieber per WhatsApp antworten</span></a></p>
+        <p class="form-hint" id="r-hint" role="status"></p>
+        </div>
+      </form>
+    </div>
+  </section>
 
   <section id="tag" class="sec wrap" aria-labelledby="h-day">
     <div class="sec-head">
@@ -768,43 +805,6 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
       <article class="spot pop" style="--i:1"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 12v26"/><path d="M8 22c3-8 10-12 16-12s13 4 16 12c-2.7-2-5.3-2-8 0-2.7-2-5.3-2-8 0-2.7-2-5.3-2-8 0-2.7-2-5.3-2-8 0z"/><path d="M6 40c6-3 30-3 36 0"/></svg><h3 data-i18n="s2.t">Nin</h3><p class="km" data-i18n="s2.k"></p><p data-i18n="s2.d"></p></article>
       <article class="spot pop" style="--i:2"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 12h14v6M42 12H28v6"/><path d="M20 18v14M24 14v18M28 18v14"/><path d="M6 38c3-2.5 6-2.5 9 0s6 2.5 9 0 6-2.5 9 0 6 2.5 9 0"/></svg><h3 data-i18n="s3.t">Krka</h3><p class="km" data-i18n="s3.k"></p><p data-i18n="s3.d"></p></article>
       <article class="spot pop" style="--i:3"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8v24"/><path d="M24 10l12 18H24"/><path d="M22 14L13 28h9"/><path d="M8 32h32l-5 6H13z"/><path d="M6 43c3-2 6-2 9 0s6 2 9 0 6-2 9 0 6 2 9 0"/></svg><h3 data-i18n="s4.t">Kornati</h3><p class="km" data-i18n="s4.k"></p><p data-i18n="s4.d"></p></article>
-    </div>
-  </section>
-
-  <section class="rsvp" id="zusage" aria-labelledby="h-rsvp">
-    <div class="wrap">
-      <h2 id="h-rsvp" class="foil" data-i18n="rsvp.title">Seid ihr dabei?</h2>
-      <p data-i18n="rsvp.text">Bitte gebt uns Bescheid, ob ihr mitfeiert. Wir hoffen von Herzen, dass ihr dabei seid!</p>
-      <p class="by" data-i18n="rsvp.by">bis zum 30. April 2027</p>
-      <form class="rsvp-card" id="rsvp-form" novalidate>
-        <div class="rsvp-done" id="r-done" hidden><p class="done-t" id="r-done-t"></p><button type="button" class="btn ghost sm" id="r-again" data-i18n="rsvp.again">Antwort ändern</button></div>
-        <div id="r-fields">
-        <div class="field"><label for="r-name" data-i18n="rsvp.name">Euer Name</label><input type="text" id="r-name" autocomplete="name" data-i18n-ph="rsvp.namePh"></div>
-        <fieldset class="field">
-          <legend data-i18n="rsvp.q">Kommt ihr?</legend>
-          <div class="choice">
-            <label><input class="vh" type="radio" name="r-yes" value="yes"><span data-i18n="rsvp.yes">Ja, wir sind dabei!</span></label>
-            <label><input class="vh" type="radio" name="r-yes" value="no"><span data-i18n="rsvp.no">Leider nicht</span></label>
-          </div>
-        </fieldset>
-        <div id="r-more" hidden>
-          <div class="field">
-            <span class="lbl" id="r-count-l" data-i18n="rsvp.count">Wie viele Personen?</span>
-            <div class="stepper" role="group" aria-labelledby="r-count-l">
-              <button type="button" id="r-minus" data-i18n-aria="rsvp.less" aria-label="Weniger">&minus;</button>
-              <output id="r-n" aria-live="polite">2</output>
-              <button type="button" id="r-plus" data-i18n-aria="rsvp.more" aria-label="Mehr">+</button>
-            </div>
-          </div>
-          <div class="field"><label for="r-food" data-i18n="rsvp.food">Essenswünsche oder Allergien</label><input type="text" id="r-food" data-i18n-ph="rsvp.foodPh"></div>
-          <div class="field"><label for="r-song" data-i18n="rsvp.song">Euer Song für die Tanzfläche</label><input type="text" id="r-song" data-i18n-ph="rsvp.songPh"></div>
-        </div>
-        <div class="field"><label for="r-msg" data-i18n="rsvp.msg">Eine Nachricht an uns</label><textarea id="r-msg" rows="3" data-i18n-ph="rsvp.msgPh"></textarea></div>
-        <button type="submit" class="btn send" id="r-submit"><span data-i18n="rsvp.submit">Antwort senden</span></button>
-        <p class="alt-line"><a class="alt-link" id="r-send" href="#zusage" target="_blank" rel="noopener" aria-disabled="true"><svg class="bubble" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.4 18.6z"/></svg><span data-i18n="rsvp.wa">Lieber per WhatsApp antworten</span></a></p>
-        <p class="form-hint" id="r-hint" role="status"></p>
-        </div>
-      </form>
     </div>
   </section>
 
