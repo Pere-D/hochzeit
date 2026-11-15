@@ -393,6 +393,42 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
   .timeline li.tl-armed .what,.timeline li.tl-armed .time,.timeline li.tl-armed:nth-child(even) .what,.timeline li.tl-armed:nth-child(even) .time{transform:translateX(24px)}
 }
 @media (prefers-reduced-motion:reduce){.timeline::after{transform:none}}
+
+/* Site plan (schematic) */
+.plan{margin:0 auto 52px;max-width:880px;text-align:center}
+.plan-t{font:400 28px/1.2 var(--f-display);margin:0 0 16px}
+.plan svg{display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--gold-l);box-shadow:0 26px 50px -38px rgba(134,102,43,.7);background:#fff}
+.plan .sea{fill:#F4F8F8}
+.plan .wave{fill:none;stroke:#C9DADB;stroke-width:2;stroke-linecap:round}
+.plan .land{fill:var(--blush);stroke:var(--gold);stroke-width:2}
+.plan .sand{fill:none;stroke:var(--gold-l);stroke-width:9;stroke-linecap:round;opacity:.8}
+.plan .trees circle{fill:#E3E8D6;stroke:#C7CFB3;stroke-width:1.5}
+.plan .road{fill:none;stroke:#D9CDB4;stroke-width:9;stroke-linecap:round}
+.plan .walk{fill:none;stroke:var(--gold-d);stroke-width:3;stroke-linecap:round;stroke-dasharray:2 9;animation:march 1s linear infinite}
+@keyframes march{to{stroke-dashoffset:-11}}
+.plan .dot{fill:var(--gold);stroke:#fff;stroke-width:3}
+.plan .dot.ink{fill:var(--ink)}
+.plan .dot.party{fill:var(--gold-d)}
+.plan .halo{fill:none;stroke:var(--gold);stroke-width:2;animation:halo 2.2s ease-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes halo{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.4)}}
+.plan .glyph{fill:#fff;font:600 20px/1 var(--f-body);text-anchor:middle}
+.plan .glyph.heart{font-size:21px}
+.plan .lbl{font:500 25px var(--f-body);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:6px;stroke-linejoin:round}
+.plan .lbl.strong{font:400 34px var(--f-display);fill:var(--gold-d)}
+.plan .lbl.small{font-size:21px;fill:var(--muted)}
+.plan .sea-l{font:italic 400 26px var(--f-display);fill:#8FAAAD;text-anchor:start}
+.plan .compass path{fill:var(--gold)}
+.plan .pin-in{transform-box:fill-box}
+.plan.go .pin-in{animation:drop .7s cubic-bezier(.3,1.6,.5,1) calc(.3s + var(--d,0) * .2s) backwards}
+@keyframes drop{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+.legend{list-style:none;margin:18px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;font-size:16px;text-align:left}
+.legend li{display:flex;align-items:center;gap:9px}
+.legend .k{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;font:600 13px/1 var(--f-body);flex:none}
+.legend .k.party{background:var(--gold-d)}
+.legend .k.ink{background:var(--ink)}
+.legend .k.walk{background:none;width:26px;height:3px;border-radius:0;background-image:radial-gradient(circle,var(--gold-d) 1.5px,transparent 1.6px);background-size:8px 3px}
+.plan figcaption{margin-top:10px;font-size:13px;color:var(--muted)}
+@media (max-width:560px){.plan svg{border-radius:14px}.legend{font-size:15px;flex-direction:column;align-items:flex-start;max-width:340px}}
 </style>
 </head>
 <body>
@@ -510,8 +546,35 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
     <figure class="vp fade">
       <div class="vp-zoom">
         <img src="pinija.jpg" width="1188" height="789" alt="Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel" data-i18n-alt="place.alt" loading="lazy" decoding="async">
-        <div class="pin" style="left:46%;top:57%"><span class="pin-dot"></span><span class="pin-label" data-i18n="place.pin">Hier feiern wir</span></div>
+        <div class="pin" style="left:46%;top:57%"><span class="pin-dot"></span><span class="pin-label" data-i18n="place.pin">Hotel Pinija</span></div>
       </div>
+    </figure>
+    <figure class="plan pop">
+      <h3 class="plan-t" data-i18n="map.title">Lageplan</h3>
+      <svg viewBox="0 0 800 460" role="img" aria-labelledby="plan-svg-t">
+        <title id="plan-svg-t">Lageplan Hotel Pinija und Congress &amp; Event Center</title>
+        <rect class="sea" width="800" height="460"/>
+        <path class="wave" d="M40 410q15-7 30 0t30 0t30 0M560 430q15-7 30 0t30 0t30 0M300 30q15-7 30 0t30 0t30 0M60 40q15-7 30 0t30 0"/>
+        <path class="land" d="M800 40C700 80 600 95 470 100C330 105 200 90 110 120C40 145 35 230 90 265C180 300 330 320 480 330C600 340 700 370 800 400Z"/>
+        <path class="sand" d="M95 268C180 302 330 322 480 332C600 342 700 372 800 402"/>
+        <g class="trees"><circle cx="70" cy="190" r="9"/><circle cx="95" cy="168" r="7"/><circle cx="120" cy="215" r="10"/><circle cx="140" cy="250" r="8"/><circle cx="150" cy="140" r="9"/><circle cx="225" cy="130" r="8"/><circle cx="250" cy="205" r="9"/><circle cx="275" cy="170" r="7"/><circle cx="300" cy="250" r="10"/><circle cx="320" cy="140" r="8"/><circle cx="345" cy="185" r="7"/><circle cx="420" cy="170" r="9"/><circle cx="445" cy="280" r="8"/><circle cx="470" cy="140" r="7"/><circle cx="520" cy="290" r="9"/><circle cx="560" cy="160" r="8"/><circle cx="600" cy="300" r="7"/><circle cx="110" cy="240" r="6"/><circle cx="205" cy="255" r="8"/><circle cx="240" cy="285" r="6"/></g>
+        <path class="road" d="M800 230L712 228C600 226 480 232 405 236"/>
+        <path class="walk" d="M372 226C320 206 255 176 198 158"/>
+        <text class="lbl sea-l" x="70" y="380" data-i18n="map.s6">Adria</text>
+        <text class="lbl small" x="640" y="78" data-i18n="map.s5">Petrčane</text>
+        <text class="lbl small" x="232" y="352" data-i18n="map.s4">Strand</text>
+        <g transform="translate(712 228)"><g class="pin-in" style="--d:3"><circle class="dot ink" r="16"/><text class="glyph" y="7">P</text><text class="lbl" x="18" y="-26" style="text-anchor:end" data-i18n="map.s3">Parkplatz</text></g></g>
+        <g transform="translate(377 230)"><g class="pin-in" style="--d:2"><circle class="dot" r="16"/><text class="glyph" y="7">H</text><text class="lbl" y="44" data-i18n="map.s2">Hotel</text></g></g>
+        <g transform="translate(186 152)"><g class="pin-in" style="--d:1"><circle class="halo" r="18"/><circle class="dot party" r="19"/><text class="glyph heart" y="8">&#9829;</text><text class="lbl strong" y="-30" data-i18n="map.s1">Feier</text></g></g>
+        <g class="compass" transform="translate(748 420)"><path d="M0 -24L7 0H-7Z"/><text class="lbl small" y="20">N</text></g>
+      </svg>
+      <ul class="legend">
+        <li><span class="k party">&#9829;</span><span data-i18n="map.l1">Feier: Congress &amp; Event Center Zadar</span></li>
+        <li><span class="k">H</span><span data-i18n="map.l2">Hotel Pinija (Zimmer und Rezeption)</span></li>
+        <li><span class="k ink">P</span><span data-i18n="map.l3">Parkplatz</span></li>
+        <li><span class="k walk"></span><span data-i18n="map.l4">Vom Hotel zur Feier ca. 3 Min. zu Fuss</span></li>
+      </ul>
+      <figcaption data-i18n="map.note">Skizze, nicht massstabsgetreu</figcaption>
     </figure>
     <div class="place-grid">
       <div>
@@ -712,7 +775,7 @@ de:{
 "ev5.t":"Hochzeitstorte","ev5.d":"Wir schneiden die Torte an, mit euch an unserer Seite.",
 "ev6.time":"bis 03:00","ev6.t":"Party","ev6.d":"Dann gehört die Tanzfläche euch, bis tief in die Nacht.",
 "place.title":"Hier feiern wir","place.lead":"Das Hotel Pinija liegt auf einer kleinen Halbinsel im Pinienwald, direkt am Meer, rund 13 km nördlich von Zadar. Wir feiern im Congress &amp; Event Center mit Blick aufs Wasser.",
-"place.maps":"Route in Google Maps","place.web":"Website des Hotels","place.pin":"Hier feiern wir","place.alt":"Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel",
+"place.maps":"Route in Google Maps","place.web":"Website des Hotels","place.pin":"Hotel Pinija","place.alt":"Luftaufnahme von Petrčane mit dem Hotel Pinija auf der Halbinsel",
 "stay.title":"Bleibt über Nacht","stay.text":"Am schönsten ist es, wenn ihr gleich im Hotel Pinija übernachtet. Mit diesem Code erhaltet ihr 5&nbsp;% Rabatt bei Buchung über die Website des Hotels.",
 "stay.copy":"Code kopieren","stay.copied":"Kopiert","stay.note":"Für unsere Gäste fragen wir gerade ein Zimmerkontingent an. Wir melden uns dazu.",
 "travel.title":"Eure Reise zu uns","travel.lead":"Viele von euch nehmen einen weiten Weg auf sich, und das bedeutet uns unglaublich viel. Hier findet ihr alles, damit ihr entspannt bei uns ankommt.",
@@ -771,6 +834,7 @@ de:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Antwort senden","rsvp.sending":"Wird gesendet …","rsvp.ok":"Danke, eure Antwort ist bei uns angekommen! Wir freuen uns riesig auf euch.","rsvp.okNo":"Danke für eure Antwort. Schade, dass ihr nicht dabei sein könnt, wir denken an euch!","rsvp.err":"Das hat leider nicht geklappt. Versucht es nochmal oder antwortet uns per WhatsApp.","rsvp.wa":"Lieber per WhatsApp antworten","rsvp.again":"Antwort ändern",
 "photos.closed":"Das Hochladen ist gerade geschlossen.",
+"map.title":"Lageplan","map.s1":"Feier","map.s2":"Hotel","map.s3":"Parkplatz","map.s4":"Strand","map.s5":"Petrčane","map.s6":"Adria","map.l1":"Feier: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (Zimmer und Rezeption)","map.l3":"Parkplatz","map.l4":"Vom Hotel zur Feier ca. 3 Min. zu Fuss","map.note":"Skizze, nicht massstabsgetreu",
 "foot.love":"In Liebe","foot.text":"Wir freuen uns riesig auf euch!","foot.fam":"Familien Weiss &amp; Dalić"
 },
 hr:{
@@ -790,7 +854,7 @@ hr:{
 "ev5.t":"Svadbena torta","ev5.d":"Režemo tortu, a vi ste uz nas.",
 "ev6.time":"do 03:00","ev6.t":"Zabava","ev6.d":"Onda je plesni podij vaš, do kasno u noć.",
 "place.title":"Ovdje slavimo","place.lead":"Hotel Pinija nalazi se na malom poluotoku u borovoj šumi, uz samo more, oko 13 km sjeverno od Zadra. Slavimo u Congress &amp; Event Centru s pogledom na more.",
-"place.maps":"Ruta u Google Maps","place.web":"Web stranica hotela","place.pin":"Ovdje slavimo","place.alt":"Pogled iz zraka na Petrčane i hotel Pinija na poluotoku",
+"place.maps":"Ruta u Google Maps","place.web":"Web stranica hotela","place.pin":"Hotel Pinija","place.alt":"Pogled iz zraka na Petrčane i hotel Pinija na poluotoku",
 "stay.title":"Ostanite preko noći","stay.text":"Najljepše je ako prenoćite u hotelu Pinija. Uz ovaj kod dobivate 5&nbsp;% popusta pri rezervaciji preko web stranice hotela.",
 "stay.copy":"Kopiraj kod","stay.copied":"Kopirano","stay.note":"Za naše goste upravo tražimo kontingent soba. Javit ćemo vam se.",
 "travel.title":"Vaš put do nas","travel.lead":"Mnogi od vas putuju izdaleka i to nam neizmjerno puno znači. Ovdje ćete naći sve da opušteno stignete do nas.",
@@ -849,6 +913,7 @@ hr:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Pošalji odgovor","rsvp.sending":"Šalje se …","rsvp.ok":"Hvala, vaš odgovor je stigao! Jako se veselimo vama.","rsvp.okNo":"Hvala na odgovoru. Šteta što ne možete doći, mislit ćemo na vas!","rsvp.err":"Nažalost nije uspjelo. Pokušajte ponovno ili nam odgovorite preko WhatsAppa.","rsvp.wa":"Radije odgovori preko WhatsAppa","rsvp.again":"Promijeni odgovor",
 "photos.closed":"Učitavanje je trenutno zatvoreno.",
+"map.title":"Plan lokacije","map.s1":"Slavlje","map.s2":"Hotel","map.s3":"Parking","map.s4":"Plaža","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Slavlje: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (sobe i recepcija)","map.l3":"Parkiralište","map.l4":"Od hotela do slavlja oko 3 min pješice","map.note":"Skica, nije u mjerilu",
 "foot.love":"S ljubavlju","foot.text":"Jako se veselimo vama!","foot.fam":"Obitelji Weiss i Dalić"
 },
 cs:{
@@ -868,7 +933,7 @@ cs:{
 "ev5.t":"Svatební dort","ev5.d":"Nakrojíme dort a vy budete u toho.",
 "ev6.time":"do 03:00","ev6.t":"Párty","ev6.d":"Pak patří taneční parket vám, dlouho do noci.",
 "place.title":"Tady budeme slavit","place.lead":"Hotel Pinija leží na malém poloostrově v borovém lese přímo u moře, asi 13 km severně od Zadaru. Slavit budeme v Congress &amp; Event Center s výhledem na moře.",
-"place.maps":"Trasa v Google Maps","place.web":"Web hotelu","place.pin":"Tady slavíme","place.alt":"Letecký pohled na Petrčane a hotel Pinija na poloostrově",
+"place.maps":"Trasa v Google Maps","place.web":"Web hotelu","place.pin":"Hotel Pinija","place.alt":"Letecký pohled na Petrčane a hotel Pinija na poloostrově",
 "stay.title":"Zůstaňte přes noc","stay.text":"Nejkrásnější bude, když přespíte přímo v hotelu Pinija. S tímto kódem získáte slevu 5&nbsp;% při rezervaci přes web hotelu.",
 "stay.copy":"Zkopírovat kód","stay.copied":"Zkopírováno","stay.note":"Pro naše hosty právě vyjednáváme kontingent pokojů. Ozveme se.",
 "travel.title":"Vaše cesta k nám","travel.lead":"Mnozí z vás k nám pojedou zdaleka a moc si toho vážíme. Tady najdete vše, abyste k nám dorazili v klidu.",
@@ -927,6 +992,7 @@ cs:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Odeslat odpověď","rsvp.sending":"Odesílá se …","rsvp.ok":"Děkujeme, vaše odpověď dorazila! Moc se na vás těšíme.","rsvp.okNo":"Děkujeme za odpověď. Škoda, že nemůžete přijet, budeme na vás myslet!","rsvp.err":"To se bohužel nepovedlo. Zkuste to znovu nebo nám odpovězte přes WhatsApp.","rsvp.wa":"Raději odpovědět přes WhatsApp","rsvp.again":"Změnit odpověď",
 "photos.closed":"Nahrávání je teď uzavřené.",
+"map.title":"Plán areálu","map.s1":"Oslava","map.s2":"Hotel","map.s3":"Parkoviště","map.s4":"Pláž","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Oslava: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (pokoje a recepce)","map.l3":"Parkoviště","map.l4":"Z hotelu na oslavu asi 3 min pěšky","map.note":"Náčrt, není v měřítku",
 "foot.love":"S láskou","foot.text":"Moc se na vás těšíme!","foot.fam":"Rodiny Weiss a Dalić"
 }};
 
