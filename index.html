@@ -469,6 +469,27 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 .wx-rows dd{margin:2px 0 0;font:400 20px/1.2 var(--f-display);font-variant-numeric:lining-nums}
 .wx-note{grid-column:1/-1;margin:0;font-size:14px;color:var(--muted);border-top:1px solid var(--gold-l);padding-top:12px}
 @media (max-width:560px){.wx{grid-template-columns:minmax(0,1fr);padding:26px 20px 18px}.wx-ico{width:64px;height:64px}}
+
+/* Little live weather badge, top right in the hero */
+.hwx{position:absolute;top:18px;right:max(20px,env(safe-area-inset-right,0px));z-index:2;display:flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--gold-l);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-decoration:none;color:var(--ink);box-shadow:0 10px 26px -18px rgba(134,102,43,.7);animation:rise .9s 2s both;transition:transform .3s ease}
+.hwx:hover{transform:translateY(-2px)}
+.hwx-ico{width:46px;height:46px;flex:none;fill:none;stroke:var(--gold);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.hwx-ico .core{fill:#F7E6B0}
+.hwx-ico .cl{fill:#fff;animation:hwdrift 5s ease-in-out infinite alternate}
+.hwx-ico .rays{transform-origin:24px 24px;animation:wxspin 18s linear infinite}
+.hwx.k-partly .rays{transform-origin:17px 17px}
+.hwx-ico .drops{stroke-dasharray:3 4;animation:wxdrip 1s linear infinite}
+.hwx-ico .bolt{stroke:var(--gold-d);animation:hwflash 2.4s ease-in-out infinite}
+.hwx.k-sun .hwx-ico,.hwx.k-partly .hwx-ico{animation:hwglow 3.2s ease-in-out infinite}
+.hwx.hot .hwx-ico{stroke:#C98A2E}.hwx.hot .core{fill:#F6CF7A}
+.hwx.cool .core{fill:#F1EBD9}
+.hwx-t{display:flex;flex-direction:column;line-height:1}
+.hwx-t b{font:400 24px/1 var(--f-display);font-variant-numeric:lining-nums}
+.hwx-t small{font:500 10px/1.4 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+@keyframes hwdrift{from{transform:translateX(-1.5px)}to{transform:translateX(2.5px)}}
+@keyframes hwglow{0%,100%{filter:drop-shadow(0 0 0 rgba(232,190,90,0))}50%{filter:drop-shadow(0 0 7px rgba(232,190,90,.85))}}
+@keyframes hwflash{0%,82%,100%{opacity:1}86%,94%{opacity:.15}}
+@media (max-width:560px){.hwx{top:12px;padding:4px 12px 4px 6px}.hwx-ico{width:36px;height:36px}.hwx-t b{font-size:20px}.hero-in{padding-top:74px}}
 </style>
 </head>
 <body>
@@ -495,6 +516,7 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 <main id="top">
   <section class="hero" aria-label="Kim &amp; Pere">
     <canvas id="dust" aria-hidden="true"></canvas>
+    <a class="hwx" id="hwx" href="#infos"><svg class="hwx-ico" id="hwx-ico" viewBox="0 0 48 48" aria-hidden="true"></svg><span class="hwx-t"><b id="hwx-temp">29°</b><small>Petrčane</small></span></a>
     <div class="hero-in wrap">
       <p class="kicker" data-i18n="hero.kicker">Gemeinsam mit unseren Familien laden wir euch herzlich ein</p>
       <h1 class="names foil"><span class="n">Kim</span> <span class="amp">&amp;</span> <span class="n">Pere</span></h1>
@@ -1225,6 +1247,12 @@ const WX_ICONS={
   cloud:'<path d="M14 36h20a8 8 0 0 0 0-16 10 10 0 0 0-19 3 6.5 6.5 0 0 0-1 13z"/>',
   rain:'<path d="M14 30h20a8 8 0 0 0 0-16 10 10 0 0 0-19 3 6.5 6.5 0 0 0-1 13z"/><path class="drops" d="M17 35l-2 6M25 35l-2 6M33 35l-2 6"/>',
   storm:'<path d="M14 30h20a8 8 0 0 0 0-16 10 10 0 0 0-19 3 6.5 6.5 0 0 0-1 13z"/><path d="M25 31l-4 6h5l-3 6"/>'};
+const HWX_ICONS={
+  sun:'<circle class="core" cx="24" cy="24" r="9"/><g class="rays"><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M9.9 38.1l4.2-4.2M33.9 14.1l4.2-4.2"/></g>',
+  partly:'<g class="rays"><circle class="core" cx="17" cy="17" r="7"/><path d="M17 4v4M4 17h4M7.8 7.8l2.8 2.8M26.2 7.8l-2.8 2.8"/></g><path class="cl" d="M16 40h19a7.5 7.5 0 0 0 0-15 9.5 9.5 0 0 0-18 3.2A5.9 5.9 0 0 0 16 40z"/>',
+  cloud:'<path class="cl" d="M13 37h21a8.5 8.5 0 0 0 0-17 10.5 10.5 0 0 0-20 3.4A6.8 6.8 0 0 0 13 37z"/>',
+  rain:'<path class="cl" d="M13 30h21a8.5 8.5 0 0 0 0-17 10.5 10.5 0 0 0-20 3.4A6.8 6.8 0 0 0 13 30z"/><path class="drops" d="M17 35l-2 7M25 35l-2 7M33 35l-2 7"/>',
+  storm:'<path class="cl" d="M13 30h21a8.5 8.5 0 0 0 0-17 10.5 10.5 0 0 0-20 3.4A6.8 6.8 0 0 0 13 30z"/><path class="bolt" d="M25 31l-4 6h5l-3 7"/>'};
 const wxKind=c=>c===0?"sun":c<=2?"partly":(c===3||c===45||c===48)?"cloud":c>=95?"storm":"rain";
 let WX=null;
 function renderWx(){
@@ -1232,6 +1260,8 @@ function renderWx(){
   const after=Date.now()>Date.parse("2027-08-29T22:00:00Z"); box.hidden=after; if(after) return;
   const live=!!(WX&&WX.max!=null), kind=live?wxKind(WX.code):"sun";
   $("wx-ico").innerHTML=WX_ICONS[kind];
+  const hb=$("hwx"), tmax=live?Math.round(WX.max):29;
+  if(hb){ $("hwx-ico").innerHTML=HWX_ICONS[kind]; $("hwx-temp").textContent=tmax+"°"; hb.className="hwx k-"+kind+(tmax>=30?" hot":tmax<24?" cool":""); hb.setAttribute("aria-label",t("wx.title")+": "+t("wx.k."+kind)+", "+tmax+"°"); }
   $("wx-badge").textContent=t(live?"wx.live":"wx.clim");
   $("wx-cond").textContent=t("wx.k."+kind);
   $("wx-temp").textContent=(live?Math.round(WX.max):29)+"°";
