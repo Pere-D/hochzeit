@@ -394,7 +394,20 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
 }
 @media (prefers-reduced-motion:reduce){.timeline::after{transform:none}}
 
-/* Site plan (schematic) */
+/* Site plan (OpenStreetMap based) */
+.plan .coast{fill:none;stroke:var(--gold);stroke-width:2}
+.plan .sandp{fill:#F1E3BE;stroke:none}
+.plan .lot{fill:#ECE7DD;stroke:#CFC6B4;stroke-width:1.5}
+.plan .rd-t path{fill:none;stroke:#D6CBB3;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.plan .rd-s path{fill:none;stroke:#E4DCCB;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.plan .ft path{fill:none;stroke:#D9CFBB;stroke-width:1.5;stroke-dasharray:3 4}
+.plan .bldg path{fill:#E7E1D6;stroke:#CFC6B4;stroke-width:1}
+.plan .bldg-h{fill:var(--gold-l);stroke:var(--gold);stroke-width:1.5}
+.plan .bldg-c path{fill:var(--gold);stroke:var(--gold-d);stroke-width:1.5}
+.plan .drive{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-dasharray:8 6;stroke-linecap:round;opacity:.55;animation:march 1.2s linear infinite reverse}
+.plan .scale path{fill:none;stroke:var(--muted);stroke-width:2}
+.plan .trees circle{fill:#E3E8D6;stroke:#C7CFB3;stroke-width:1.2;opacity:.9}
+
 .plan{margin:0 auto 52px;max-width:880px;text-align:center}
 .plan-t{font:400 28px/1.2 var(--f-display);margin:0 0 16px}
 .plan svg{display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--gold-l);box-shadow:0 26px 50px -38px rgba(134,102,43,.7);background:#fff}
@@ -551,30 +564,40 @@ h2{font:400 clamp(34px,4.6vw,50px)/1.1 var(--f-display);margin:0;text-wrap:balan
     </figure>
     <figure class="plan pop">
       <h3 class="plan-t" data-i18n="map.title">Lageplan</h3>
-      <svg viewBox="0 0 800 460" role="img" aria-labelledby="plan-svg-t">
-        <title id="plan-svg-t">Lageplan Hotel Pinija und Congress &amp; Event Center</title>
-        <rect class="sea" width="800" height="460"/>
-        <path class="wave" d="M40 410q15-7 30 0t30 0t30 0M560 430q15-7 30 0t30 0t30 0M300 30q15-7 30 0t30 0t30 0M60 40q15-7 30 0t30 0"/>
-        <path class="land" d="M800 40C700 80 600 95 470 100C330 105 200 90 110 120C40 145 35 230 90 265C180 300 330 320 480 330C600 340 700 370 800 400Z"/>
-        <path class="sand" d="M95 268C180 302 330 322 480 332C600 342 700 372 800 402"/>
-        <g class="trees"><circle cx="70" cy="190" r="9"/><circle cx="95" cy="168" r="7"/><circle cx="120" cy="215" r="10"/><circle cx="140" cy="250" r="8"/><circle cx="150" cy="140" r="9"/><circle cx="225" cy="130" r="8"/><circle cx="250" cy="205" r="9"/><circle cx="275" cy="170" r="7"/><circle cx="300" cy="250" r="10"/><circle cx="320" cy="140" r="8"/><circle cx="345" cy="185" r="7"/><circle cx="420" cy="170" r="9"/><circle cx="445" cy="280" r="8"/><circle cx="470" cy="140" r="7"/><circle cx="520" cy="290" r="9"/><circle cx="560" cy="160" r="8"/><circle cx="600" cy="300" r="7"/><circle cx="110" cy="240" r="6"/><circle cx="205" cy="255" r="8"/><circle cx="240" cy="285" r="6"/></g>
-        <path class="road" d="M800 230L712 228C600 226 480 232 405 236"/>
-        <path class="walk" d="M372 226C320 206 255 176 198 158"/>
-        <text class="lbl sea-l" x="70" y="380" data-i18n="map.s6">Adria</text>
-        <text class="lbl small" x="640" y="78" data-i18n="map.s5">Petrčane</text>
-        <text class="lbl small" x="232" y="352" data-i18n="map.s4">Strand</text>
-        <g transform="translate(712 228)"><g class="pin-in" style="--d:3"><circle class="dot ink" r="16"/><text class="glyph" y="7">P</text><text class="lbl" x="18" y="-26" style="text-anchor:end" data-i18n="map.s3">Parkplatz</text></g></g>
-        <g transform="translate(377 230)"><g class="pin-in" style="--d:2"><circle class="dot" r="16"/><text class="glyph" y="7">H</text><text class="lbl" y="44" data-i18n="map.s2">Hotel</text></g></g>
-        <g transform="translate(186 152)"><g class="pin-in" style="--d:1"><circle class="halo" r="18"/><circle class="dot party" r="19"/><text class="glyph heart" y="8">&#9829;</text><text class="lbl strong" y="-30" data-i18n="map.s1">Feier</text></g></g>
-        <g class="compass" transform="translate(748 420)"><path d="M0 -24L7 0H-7Z"/><text class="lbl small" y="20">N</text></g>
+      <svg viewBox="-300 -250 780 500" role="img" aria-labelledby="plan-svg-t">
+        <title id="plan-svg-t">Lageplan Hotel Pinija und Congress &amp; Event Center, nach OpenStreetMap</title>
+        <rect class="sea" x="-300" y="-250" width="780" height="500"/>
+        <path class="wave" d="M-270 150q15-7 30 0t30 0t30 0M-150 210q15-7 30 0t30 0t30 0M-60 -200q15-7 30 0t30 0t30 0M60 -150q15-7 30 0t30 0"/>
+        <path class="land" d="M170,-437 L193,-378 L170,-369 L186,-329 L168,-311 L169,-307 L172,-306 L208,-340 L216,-340 L220,-326 L224,-269 L202,-182 L188,-145 L149,-93 L105,-64 L19,-89 L-97,-120 L-108,-123 L-194,-104 L-227,-97 L-257,-66 L-256,-52 L-249,-41 L-231,-17 L-213,1 L-207,3 L-172,36 L-129,60 L-85,85 L-38,118 L-36,124 L-28,126 L5,149 L18,158 L23,165 L26,167 L35,168 L91,224 L130,257 L169,288 L262,341 L351,397 L700,397 L700,-437 Z"/>
+        <path class="coast" d="M170,-437 L193,-378 L170,-369 L186,-329 L168,-311 L169,-307 L172,-306 L208,-340 L216,-340 L220,-326 L224,-269 L202,-182 L188,-145 L149,-93 L105,-64 L19,-89 L-97,-120 L-108,-123 L-194,-104 L-227,-97 L-257,-66 L-256,-52 L-249,-41 L-231,-17 L-213,1 L-207,3 L-172,36 L-129,60 L-85,85 L-38,118 L-36,124 L-28,126 L5,149 L18,158 L23,165 L26,167 L35,168 L91,224 L130,257 L169,288 L262,341 L351,397"/>
+        <path class="sandp" d="M105,-64 L112,-56 L144,-74 L147,-71 L157,-79 L166,-92 L180,-115 L193,-139 L186,-143 L149,-93 L105,-64Z"/>
+        <g class="trees"><circle cx="-232" cy="-62" r="7"/><circle cx="-240" cy="-48" r="7"/><circle cx="-214" cy="-24" r="7"/><circle cx="-196" cy="-8" r="7"/><circle cx="-160" cy="10" r="7"/><circle cx="-140" cy="-20" r="7"/><circle cx="-128" cy="30" r="7"/><circle cx="-110" cy="-80" r="7"/><circle cx="-100" cy="48" r="7"/><circle cx="-88" cy="4" r="7"/><circle cx="-150" cy="-80" r="7"/><circle cx="-130" cy="-60" r="7"/><circle cx="-76" cy="-60" r="7"/><circle cx="-50" cy="-80" r="7"/><circle cx="-70" cy="70" r="7"/><circle cx="-40" cy="96" r="7"/><circle cx="-205" cy="-70" r="7"/><circle cx="-120" cy="-90" r="7"/><circle cx="-95" cy="-15" r="7"/><circle cx="-160" cy="-45" r="7"/><circle cx="-30" cy="-70" r="7"/><circle cx="80" cy="-40" r="7"/><circle cx="60" cy="-20" r="7"/></g>
+        <path class="lot" d="M174,-62 L181,-66 L273,-12 L273,7 L270,27 L150,-44 L156,-53 L167,-58 L174,-62Z"/><path class="lot" d="M321,52 L313,48 L332,14 L345,22 L330,47 L325,44 L321,52Z"/>
+        <g class="rd-t"><path d="M141,-51 L151,-56 L157,-58 L164,-62 L171,-66 L175,-71 L180,-86 L195,-131 L198,-141 L202,-154 L226,-247 L230,-267 L231,-292 L227,-324"/><path d="M524,-228 L509,-217 L495,-204 L479,-188 L444,-148 L417,-101 L403,-74 L366,-12 L330,56 L324,63"/></g>
+        <g class="rd-s"><path d="M141,-51 L119,-42 L111,-41 L100,-36 L89,-32 L35,-10 L30,-7"/><path d="M30,-7 L11,1 L6,5 L2,10 L1,16 L4,19 L11,24 L16,25 L24,22 L29,11 L29,2 L30,-7"/><path d="M109,-40 L85,-54 L78,-56 L53,-66 L30,-74 L18,-79 L-14,-51"/><path d="M35,-10 L10,-37 L2,-42 L-14,-51"/><path d="M-14,-51 L-27,-41 L-33,-29 L-43,-9 L-24,1 L-18,-15 L-33,-29"/><path d="M6,-28 L-27,-41"/><path d="M-18,-15 L5,-9 L6,-28"/><path d="M268,30 L270,27 L270,14 L269,-6 L174,-62 L171,-66"/><path d="M270,14 L156,-53 L151,-56"/><path d="M312,93 L282,75 L267,64 L226,35 L200,17 L171,-5 L145,-22 L119,-42"/><path d="M145,-22 L97,75 L52,173"/><path d="M119,-42 L114,-35 L90,-17 L78,5 L47,65 L19,124"/><path d="M89,-32 L58,17 L52,30 L43,51 L33,64 L2,86"/><path d="M200,17 L174,64 L113,187"/><path d="M171,-5 L97,142 L79,183"/><path d="M226,35 L186,109 L149,180 L128,227"/><path d="M540,159 L515,160 L498,156 L478,146 L438,121 L424,114 L408,109 L382,104 L371,96 L333,75 L324,63"/><path d="M312,93 L350,115 L399,144 L438,167 L476,189"/></g>
+        <g class="ft"><path d="M18,-79 L-32,-100 L-47,-102 L-99,-114 L-109,-115 L-142,-104 L-159,-93 L-189,-86 L-206,-86 L-217,-62 L-224,-45 L-205,-44 L-185,-21 L-154,-2 L-120,11 L-104,20 L-83,28 L-70,-1 L-63,-6 L-59,-16 L-57,-21 L-52,-35 L-34,-50 L-14,-51"/><path d="M-159,-93 L-179,-71 L-186,-72 L-189,-86"/><path d="M-179,-71 L-114,-46 L-93,-36 L-57,-21"/><path d="M-83,28 L-69,60 L-56,73 L-39,82 L-22,90 L-9,97 L2,86"/><path d="M19,124 L14,141 L52,173 L71,188 L91,208 L98,214 L122,237 L147,262 L170,279 L192,292 L216,305"/><path d="M-197,0 L-185,-21"/><path d="M-167,24 L-154,-2"/></g>
+        <g class="bldg"><path d="M39,89 L46,93 L41,103 L36,100 L39,95 L36,93 L39,89Z"/><path d="M27,117 L34,121 L29,130 L23,127 L27,117Z"/><path d="M66,37 L74,41 L67,53 L59,49 L66,37Z"/><path d="M-77,-95 L-74,-104 L-68,-102 L-70,-93 L-77,-95Z"/><path d="M42,124 L48,116 L56,123 L50,130 L42,124Z"/><path d="M58,54 L65,58 L60,67 L56,65 L57,63 L54,61 L58,54Z"/><path d="M49,74 L56,77 L53,84 L45,81 L49,74Z"/><path d="M94,-15 L101,-11 L96,-3 L89,-7 L94,-15Z"/><path d="M79,14 L85,17 L79,28 L73,24 L79,14Z"/><path d="M-22,-89 L1,-81 L-1,-74 L-25,-82 L-22,-89Z"/><path d="M57,141 L63,144 L59,153 L52,150 L57,141Z"/><path d="M157,14 L150,10 L153,4 L160,8 L157,14Z"/><path d="M132,14 L140,0 L146,3 L139,17 L132,14Z"/><path d="M120,59 L116,57 L117,54 L115,53 L117,48 L116,48 L121,37 L129,40 L120,59Z"/><path d="M105,89 L101,87 L102,85 L99,83 L101,79 L104,75 L110,80 L105,89Z"/><path d="M106,66 L109,59 L118,63 L114,70 L106,66Z"/><path d="M100,99 L92,95 L96,88 L103,92 L100,99Z"/><path d="M91,118 L84,115 L88,106 L95,109 L91,118Z"/><path d="M83,135 L76,132 L79,124 L87,127 L83,135Z"/><path d="M61,164 L69,147 L76,151 L68,167 L61,164Z"/></g>
+        <path class="bldg-h" d="M-60,45 L-58,40 L-66,36 L-60,23 L-59,23 L-47,1 L-21,14 L-13,-3 L2,5 L-4,16 L-9,13 L-12,19 L10,30 L26,38 L29,32 L40,10 L41,10 L45,1 L60,8 L55,18 L56,19 L39,52 L38,51 L33,61 L19,54 L18,56 L4,49 L-10,78 L-12,77 L-17,87 L-31,80 L-27,71 L-28,70 L-32,77 L-65,60 L-68,56 L-68,51 L-66,47 L-60,45Z"/>
+        <g class="bldg-c"><path d="M-182,-62 L-175,-62 L-170,-59 L-170,-54 L-171,-48 L-177,-44 L-186,-46 L-189,-51 L-187,-57 L-182,-62Z"/><path d="M-186,-46 L-189,-37 L-181,-34 L-177,-44 L-186,-46Z"/></g>
+        <path class="walk" d="M-20,12 L-43,-9 L-59,-16 L-93,-36 L-114,-46 L-162,-62"/>
+        <path class="drive" d="M224,-240 L202,-154 L195,-131 L180,-86 L171,-66 L190,-48"/>
+        <text class="lbl sea-l" x="-280" y="190" data-i18n="map.s6">Adria</text>
+        <text class="lbl small" x="300" y="-120" data-i18n="map.s5">Petrčane</text>
+        <text class="lbl small" x="120" y="-125" data-i18n="map.s4">Strand</text>
+        <text class="lbl small" x="248" y="-232" style="text-anchor:start" data-i18n="map.s7">Zufahrt</text>
+        <g transform="translate(212 -22)"><g class="pin-in" style="--d:3"><circle class="dot ink" r="15"/><text class="glyph" y="7">P</text><text class="lbl" x="20" y="-22" style="text-anchor:start" data-i18n="map.s3">Parkplatz</text></g></g>
+        <g transform="translate(-8 40)"><g class="pin-in" style="--d:2"><circle class="dot" r="15"/><text class="glyph" y="7">H</text><text class="lbl" y="44" data-i18n="map.s2">Hotel</text></g></g>
+        <g transform="translate(-178 -52)"><g class="pin-in" style="--d:1"><circle class="halo" r="18"/><circle class="dot party" r="18"/><text class="glyph heart" y="8">&#9829;</text><text class="lbl strong" y="-30" data-i18n="map.s1">Feier</text></g></g>
+        <g class="scale" transform="translate(330 222)"><path d="M0 0H100M0 -6V6M100 -6V6"/><text class="lbl small" x="50" y="-12">100 m</text></g>
+        <g class="compass" transform="translate(455 228)"><path d="M0 -24L7 0H-7Z"/><text class="lbl small" y="20">N</text></g>
       </svg>
       <ul class="legend">
         <li><span class="k party">&#9829;</span><span data-i18n="map.l1">Feier: Congress &amp; Event Center Zadar</span></li>
         <li><span class="k">H</span><span data-i18n="map.l2">Hotel Pinija (Zimmer und Rezeption)</span></li>
-        <li><span class="k ink">P</span><span data-i18n="map.l3">Parkplatz</span></li>
+        <li><span class="k ink">P</span><span data-i18n="map.l3">Parkplatz (öffentlich, kostenpflichtig)</span></li>
         <li><span class="k walk"></span><span data-i18n="map.l4">Vom Hotel zur Feier ca. 3 Min. zu Fuss</span></li>
       </ul>
-      <figcaption data-i18n="map.note">Skizze, nicht massstabsgetreu</figcaption>
+      <figcaption data-i18n="map.note">Kartengrundlage: © OpenStreetMap-Mitwirkende</figcaption>
     </figure>
     <div class="place-grid">
       <div>
@@ -834,7 +857,7 @@ de:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Antwort senden","rsvp.sending":"Wird gesendet …","rsvp.ok":"Danke, eure Antwort ist bei uns angekommen! Wir freuen uns riesig auf euch.","rsvp.okNo":"Danke für eure Antwort. Schade, dass ihr nicht dabei sein könnt, wir denken an euch!","rsvp.err":"Das hat leider nicht geklappt. Versucht es nochmal oder antwortet uns per WhatsApp.","rsvp.wa":"Lieber per WhatsApp antworten","rsvp.again":"Antwort ändern",
 "photos.closed":"Das Hochladen ist gerade geschlossen.",
-"map.title":"Lageplan","map.s1":"Feier","map.s2":"Hotel","map.s3":"Parkplatz","map.s4":"Strand","map.s5":"Petrčane","map.s6":"Adria","map.l1":"Feier: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (Zimmer und Rezeption)","map.l3":"Parkplatz","map.l4":"Vom Hotel zur Feier ca. 3 Min. zu Fuss","map.note":"Skizze, nicht massstabsgetreu",
+"map.title":"Lageplan","map.s1":"Feier","map.s2":"Hotel","map.s3":"Parkplatz","map.s4":"Strand","map.s5":"Petrčane","map.s6":"Adria","map.l1":"Feier: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (Zimmer und Rezeption)","map.l3":"Parkplatz (öffentlich, kostenpflichtig)","map.l4":"Vom Hotel zur Feier ca. 3 Min. zu Fuss","map.note":"Kartengrundlage: © OpenStreetMap-Mitwirkende","map.s7":"Zufahrt",
 "foot.love":"In Liebe","foot.text":"Wir freuen uns riesig auf euch!","foot.fam":"Familien Weiss &amp; Dalić"
 },
 hr:{
@@ -913,7 +936,7 @@ hr:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Pošalji odgovor","rsvp.sending":"Šalje se …","rsvp.ok":"Hvala, vaš odgovor je stigao! Jako se veselimo vama.","rsvp.okNo":"Hvala na odgovoru. Šteta što ne možete doći, mislit ćemo na vas!","rsvp.err":"Nažalost nije uspjelo. Pokušajte ponovno ili nam odgovorite preko WhatsAppa.","rsvp.wa":"Radije odgovori preko WhatsAppa","rsvp.again":"Promijeni odgovor",
 "photos.closed":"Učitavanje je trenutno zatvoreno.",
-"map.title":"Plan lokacije","map.s1":"Slavlje","map.s2":"Hotel","map.s3":"Parking","map.s4":"Plaža","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Slavlje: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (sobe i recepcija)","map.l3":"Parkiralište","map.l4":"Od hotela do slavlja oko 3 min pješice","map.note":"Skica, nije u mjerilu",
+"map.title":"Plan lokacije","map.s1":"Slavlje","map.s2":"Hotel","map.s3":"Parking","map.s4":"Plaža","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Slavlje: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (sobe i recepcija)","map.l3":"Parkiralište (javno, naplaćuje se)","map.l4":"Od hotela do slavlja oko 3 min pješice","map.note":"Podaci karte: © OpenStreetMap suradnici","map.s7":"Prilaz",
 "foot.love":"S ljubavlju","foot.text":"Jako se veselimo vama!","foot.fam":"Obitelji Weiss i Dalić"
 },
 cs:{
@@ -992,7 +1015,7 @@ cs:{
 "ev1.time":"16:00","ev2.time":"17:00","ev3.time":"18:00<small>–18:30</small>","ev4.time":"19:00","ev5.time":"22:00",
 "rsvp.submit":"Odeslat odpověď","rsvp.sending":"Odesílá se …","rsvp.ok":"Děkujeme, vaše odpověď dorazila! Moc se na vás těšíme.","rsvp.okNo":"Děkujeme za odpověď. Škoda, že nemůžete přijet, budeme na vás myslet!","rsvp.err":"To se bohužel nepovedlo. Zkuste to znovu nebo nám odpovězte přes WhatsApp.","rsvp.wa":"Raději odpovědět přes WhatsApp","rsvp.again":"Změnit odpověď",
 "photos.closed":"Nahrávání je teď uzavřené.",
-"map.title":"Plán areálu","map.s1":"Oslava","map.s2":"Hotel","map.s3":"Parkoviště","map.s4":"Pláž","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Oslava: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (pokoje a recepce)","map.l3":"Parkoviště","map.l4":"Z hotelu na oslavu asi 3 min pěšky","map.note":"Náčrt, není v měřítku",
+"map.title":"Plán areálu","map.s1":"Oslava","map.s2":"Hotel","map.s3":"Parkoviště","map.s4":"Pláž","map.s5":"Petrčane","map.s6":"Jadran","map.l1":"Oslava: Congress &amp; Event Center Zadar","map.l2":"Hotel Pinija (pokoje a recepce)","map.l3":"Parkoviště (veřejné, placené)","map.l4":"Z hotelu na oslavu asi 3 min pěšky","map.note":"Mapová data: © přispěvatelé OpenStreetMap","map.s7":"Příjezd",
 "foot.love":"S láskou","foot.text":"Moc se na vás těšíme!","foot.fam":"Rodiny Weiss a Dalić"
 }};
 
