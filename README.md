@@ -1,10 +1,6 @@
-# Hochzeit Kim & Pere
+# Hochzeit Kim & Pere (alte Seite, offline)
 
-Gästeseite für die Hochzeit am 28.08.2027 im Hotel Pinija, Petrčane.
+Die frühere Gästeseite unter hochzeit.pere-dalic.ch ist seit dem 18.11.2026 offline.
+Die Hochzeitsseite läuft jetzt auf Festseite: https://festseite.ch/kim-pere/
 
-Live: https://hochzeit.pere-dalic.ch
-
-- Texte, Zeiten und Einstellungen: im Admin-Google-Sheet (Tab „Inhalte“ und „Einstellungen“)
-- Zusagen: Tab „Zusagen“
-- Fotos der Gäste: Google-Drive-Ordner „Hochzeit Kim & Pere Fotos“
-- Backend-URL: Konstante `API` oben im Script in index.html
+Der frühere Stand liegt im Git-Verlauf dieses Repos.
